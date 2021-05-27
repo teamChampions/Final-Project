@@ -1,15 +1,23 @@
 import React, { useEffect, useContext } from "react";
-import { Card, Avatar, Empty, Divider } from "antd";
+import { Card, Avatar, Empty, Divider, Tooltip } from "antd";
 import { DislikeFilled, CommentOutlined, LikeFilled } from "@ant-design/icons";
 import { displayAllPosts, getPostsByCategory } from "../utils/util";
+import moment from "moment";
+
 import CommentComponent from "./commentComponent";
-import { Context } from "../context/Context";
 import AddComment from "./addComment";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function CardComponent() {
 	const { Meta } = Card;
 
-	const { state, dispatch } = useContext(Context);
+	const state = useSelector((state: any) => state.post);
+	const userState = useSelector((state: any) => state.user);
+
+	const dispatch = useDispatch();
+
+	console.log(state);
+
 	let result: any;
 	let data: any;
 
@@ -64,6 +72,12 @@ export default function CardComponent() {
 								title={value.users.userName}
 								description={value.description}
 							/>
+							<Tooltip
+								className="tooltip-time"
+								title={moment().format("YYYY-MM-DD HH:mm:ss")}
+							>
+								<small>{moment(value.createdAt).fromNow()}</small>
+							</Tooltip>
 							{state.loggedIn && <Divider />}
 							{state.loggedIn && (
 								<Meta

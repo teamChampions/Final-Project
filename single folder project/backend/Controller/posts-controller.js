@@ -48,11 +48,13 @@ var getAllposts = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 .populate({ path: "users", select: "_id userName" })
                 .populate({
                 path: "comments",
+                options: { sort: { createdAt: "desc" } },
                 populate: {
                     path: "user",
                     select: "_id userName",
                 },
             })
+                .sort({ createdAt: "desc" })
                 .exec(function (err, posts) {
                 res.status(200).send(posts);
             });
@@ -75,11 +77,13 @@ var getAllpostsByCategory = function (req, res) { return __awaiter(void 0, void 
                 .populate({ path: "users", select: "_id userName" })
                 .populate({
                 path: "comments",
+                options: { sort: { createdAt: "desc" } },
                 populate: {
                     path: "user",
                     select: "_id userName",
                 },
             })
+                .sort({ createdAt: "desc" })
                 .exec(function (err, posts) {
                 res.status(200).send(posts);
             });

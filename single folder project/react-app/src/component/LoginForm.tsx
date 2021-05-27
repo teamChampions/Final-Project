@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-import { Context } from "../context/Context";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { useHistory } from "react-router";
 
@@ -9,7 +9,8 @@ export default function Login() {
 		email: "",
 		password: "",
 	});
-	const { state, dispatch } = useContext(Context);
+	const state = useSelector((state: any) => state.user);
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const setValue = (e: any) => {
 		let name: any = e.target?.name;

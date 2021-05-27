@@ -1,4 +1,14 @@
-const reducer = (currentState: any, action: any) => {
+const initialState = {
+	posts: [],
+	users: [],
+	loggedIn: false,
+	user: "",
+	searchParams: "",
+	selectedPosts: [],
+	commentLength: 0,
+};
+
+const postReducer = (currentState = initialState, action: any): any => {
 	switch (action.type) {
 		case "DISPLAY_POSTS":
 			console.log(currentState);
@@ -35,6 +45,34 @@ const reducer = (currentState: any, action: any) => {
 				commentLength: action.commentLength,
 			};
 
+		default:
+			return currentState;
+
+		// case "ADD_USER":
+		// 	console.log(currentState);
+		// 	return currentState;
+
+		// case "LOGIN":
+		// 	console.log("LOGIN", action.payload);
+		// 	console.log("LOGIN", action.user);
+
+		// 	return {
+		// 		...currentState,
+		// 		user: action.user,
+		// 		loggedIn: action.payload,
+		// 	};
+
+		// case "LOGOUT":
+		// 	return {
+		// 		...currentState,
+		// 		user: action.user,
+		// 		loggedIn: action.payload,
+		// 	};
+	}
+};
+
+const userReducer = (currentState = initialState, action: any): any => {
+	switch (action.type) {
 		case "ADD_USER":
 			console.log(currentState);
 			return currentState;
@@ -55,7 +93,9 @@ const reducer = (currentState: any, action: any) => {
 				user: action.user,
 				loggedIn: action.payload,
 			};
+		default:
+			return currentState;
 	}
 };
 
-export default reducer;
+export { postReducer, userReducer };

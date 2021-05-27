@@ -5,5 +5,6 @@ import addComment from "../Controller/comments-controller";
 const commentsRoute = express.Router();
 
 commentsRoute.post("/comments", isAuthorised, addComment);
+// commentsRoute.get("/comments", isAuthorised, addComment);
 
 export default commentsRoute;

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LogoutOutlined } from "@ant-design/icons";
-import { Context } from "../context/Context";
+import { useSelector, useDispatch } from "react-redux";
 import { Form, Button, FormControl, Col } from "react-bootstrap";
 
 import {
@@ -25,7 +25,8 @@ export default function Header() {
 	let [searchText, setsearchText] = useState({
 		searchText: "",
 	});
-	const { state, dispatch } = useContext(Context);
+	const state = useSelector((state: any) => state.user);
+	const dispatch = useDispatch();
 
 	const setCategoryValue = (e: any) => {
 		let value: any = e.target?.value;

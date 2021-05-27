@@ -6,11 +6,13 @@ const getAllposts = async (req: any, res: any) => {
 			.populate({ path: "users", select: "_id userName" })
 			.populate({
 				path: "comments",
+				options: { sort: { createdAt: "desc" } },
 				populate: {
 					path: "user",
 					select: "_id userName",
 				},
 			})
+			.sort({ createdAt: "desc" })
 			.exec((err, posts) => {
 				res.status(200).send(posts);
 			});
@@ -30,11 +32,13 @@ const getAllpostsByCategory = async (req: any, res: any) => {
 			.populate({ path: "users", select: "_id userName" })
 			.populate({
 				path: "comments",
+				options: { sort: { createdAt: "desc" } },
 				populate: {
 					path: "user",
 					select: "_id userName",
 				},
 			})
+			.sort({ createdAt: "desc" })
 			.exec((err, posts) => {
 				res.status(200).send(posts);
 			});

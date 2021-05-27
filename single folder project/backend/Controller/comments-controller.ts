@@ -2,6 +2,8 @@ import comments from "../Model/comment-schema";
 import PostsModel from "../Model/posts-schema";
 
 const addComment = async (req: any, res: any) => {
+	console.log("add comment", req.user);
+
 	try {
 		const posts: any = await PostsModel.findById(req.body.post);
 		if (posts) {

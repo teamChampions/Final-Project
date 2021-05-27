@@ -46,30 +46,33 @@ var addComment = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
-                return [4 /*yield*/, posts_schema_1.default.findById(req.body.post)];
+                console.log("add comment", req.user);
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 5, , 6]);
+                return [4 /*yield*/, posts_schema_1.default.findById(req.body.post)];
+            case 2:
                 posts = _a.sent();
-                if (!posts) return [3 /*break*/, 3];
+                if (!posts) return [3 /*break*/, 4];
                 return [4 /*yield*/, comment_schema_1.default.create({
                         comment: req.body.comment,
                         post: req.body.post,
                         user: req.user._id,
                     })];
-            case 2:
+            case 3:
                 comment = _a.sent();
                 if (comment) {
                     posts.comments.push(comment);
                     posts.save();
                     res.status(201).json(posts);
                 }
-                _a.label = 3;
-            case 3: return [3 /*break*/, 5];
-            case 4:
+                _a.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
                 err_1 = _a.sent();
                 res.status(401).send(err_1.message);
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };

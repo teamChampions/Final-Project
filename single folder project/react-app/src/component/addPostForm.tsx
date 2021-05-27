@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-import { Context } from "../context/Context";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 export default function AddPost() {
@@ -9,7 +9,8 @@ export default function AddPost() {
 		image: "",
 		category: "",
 	});
-	const { state, dispatch } = useContext(Context);
+	const state = useSelector((state: any) => state.post);
+	const dispatch = useDispatch();
 
 	const setValue = (e: any) => {
 		let name: any = e.target?.name;
