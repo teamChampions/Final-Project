@@ -1,14 +1,19 @@
 import React, { useState, useContext } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Image, Container } from "react-bootstrap";
 import { Context } from "../context/Context";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
+
+	document.body.style.backgroundColor = "#9EA9FA";
+
 	let [data, setData] = useState({
 		userName: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
+		profileImage:"",
 	});
 	const { state, dispatch } = useContext(Context);
 
@@ -39,20 +44,13 @@ export default function Signup() {
 	};
 	return (
 		<div>
-			<Form
-				style={{
-					background: "white",
-					width: "50%",
-					padding: 30,
-					margin: "5% auto",
-					borderRadius: "5px",
-					boxShadow: "0px 0px 4px 0px rgb(200, 200, 200)",
-				}}
-			>
+		<div>
+			<Form className="signup-form"
+			><h3 style={{ textAlign: "center", margin: "5% auto", fontFamily: "Pattaya, sans-serif", fontSize:"250%" }}>Skill Media</h3>
 				<Form.Row>
-					<Form.Group as={Col} controlId="formGridName">
-						<Form.Label>Username</Form.Label>
-						<Form.Control
+					<Form.Group as={Col} className="form-group-signup" controlId="formGridName">
+						<Form.Label><strong>Username</strong></Form.Label>
+						<Form.Control className="form-control-signup"
 							onChange={setValue}
 							name="userName"
 							type="text"
@@ -60,9 +58,9 @@ export default function Signup() {
 						/>
 					</Form.Group>
 
-					<Form.Group as={Col} controlId="formGridEmail">
-						<Form.Label>Email</Form.Label>
-						<Form.Control
+					<Form.Group as={Col} className="form-group-signup" controlId="formGridEmail">
+						<Form.Label><strong>Email</strong></Form.Label>
+						<Form.Control className="form-control-signup"
 							onChange={setValue}
 							type="email"
 							name="email"
@@ -72,9 +70,9 @@ export default function Signup() {
 				</Form.Row>
 
 				<Form.Row>
-					<Form.Group as={Col} controlId="formGridEmail">
-						<Form.Label>Password</Form.Label>
-						<Form.Control
+					<Form.Group as={Col} className="form-group-signup" controlId="formGridEmail">
+						<Form.Label><strong>Password</strong></Form.Label>
+						<Form.Control className="form-control-signup"
 							onChange={setValue}
 							type="password"
 							name="password"
@@ -82,9 +80,9 @@ export default function Signup() {
 						/>
 					</Form.Group>
 
-					<Form.Group as={Col} controlId="formGridPassword">
-						<Form.Label>Confirm Password</Form.Label>
-						<Form.Control
+					<Form.Group as={Col} className="form-group-signup" controlId="formGridPassword">
+						<Form.Label><strong>Confirm Password</strong></Form.Label>
+						<Form.Control className="form-control-signup"
 							onChange={setValue}
 							type="password"
 							name="password"
@@ -93,24 +91,28 @@ export default function Signup() {
 					</Form.Group>
 				</Form.Row>
 
-				<Form.Group controlId="formGridImage">
-					<Form.Label>Image</Form.Label>
-					<Form.Control
+				<Form.Group className="form-group-signup" controlId="formGridImage">
+					<Form.Label><strong>Image</strong></Form.Label>
+					<Form.Control className="form-control-signup"
 						name="profileImage"
 						onChange={setValue}
 						placeholder="Image"
 					/>
 				</Form.Group>
-
-				<Button
+				{data.profileImage?<div style={{display:"flex", justifyContent:"center"}}>
+					<div>
+						<Image className="pofileimage" roundedCircle={true} thumbnail={true} src={data.profileImage} />
+					</div>
+				</div>:null}
+				<Link to="/home"><Button className="signupsubmit"
 					variant="primary"
 					onClick={signupSubmit}
 					type="button"
-					style={{ margin: "0 43%" }}
-				>
-					Submit
+				>Submit
 				</Button>
+				</Link>
 			</Form>
+		</div>
 		</div>
 	);
 }

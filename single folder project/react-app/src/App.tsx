@@ -3,21 +3,23 @@ import Homepage from "./component/Header";
 import ContextProvider from "./context/Context";
 import Signup from "./component/signupForm";
 import CardComponent from "./component/card";
-import "./style.css";
-
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import AddPost from "./component/addPostForm";
 import Login from "./component/LoginForm";
+import ContactUs from "./component/ContactUs";
+import Profile from "./component/Profile";
 
 function App() {
 	return (
 		<div className="App">
 			<ContextProvider>
 				<Router>
-					<Homepage />
 					<Switch>
 						<Route exact path="/">
-							<CardComponent />
+							<Login />
+						</Route>
+						<Route exact path="/home">
+							<Homepage />
 						</Route>
 						<Route exact path="/addPost">
 							<AddPost />
@@ -25,9 +27,14 @@ function App() {
 						<Route exact path="/signup">
 							<Signup />
 						</Route>
-
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/contactus">
+							<ContactUs />
+						</Route>
+						<Route exact path="/profile">
+							<Profile />
 						</Route>
 					</Switch>
 				</Router>

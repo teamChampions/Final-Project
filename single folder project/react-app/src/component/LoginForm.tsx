@@ -3,8 +3,14 @@ import { Form, Button, Col } from "react-bootstrap";
 import { Context } from "../context/Context";
 import axios from "axios";
 import { useHistory } from "react-router";
+import secure_login  from "../images/secure_login.svg"
+import "../style.css"
+import { Link } from "react-router-dom";
 
 export default function Login() {
+
+	document.body.style.backgroundColor = "#9EA9FA";
+	
 	let [data, setData] = useState({
 		email: "",
 		password: "",
@@ -39,7 +45,7 @@ export default function Login() {
 				payload: localStorage.length > 0,
 				user: localStorage.getItem("user"),
 			});
-			history.push("/");
+			history.push("/home");
 			return;
 		} else {
 			console.log("Enter all values");
@@ -47,31 +53,26 @@ export default function Login() {
 	};
 
 	return (
-		<div>
-			<Form
-				style={{
-					background: "white",
-					width: "45%",
-					padding: 30,
-					margin: "5% auto",
-					borderRadius: "5px",
-					boxShadow: "0px 0px 4px 0px rgb(200, 200, 200)",
-				}}
-			>
+		<div className = "login-page" style={{
+			display: "flex"}}>
+			<div className="secure-login-svg">
+				<img src={secure_login}/>
+			</div>
+			<Form className="login-form"
+			><h3 style={{ textAlign: "center", marginBottom: "25%", fontFamily: "Pattaya, sans-serif", fontSize:"250%" }}>Skill Media</h3>
 				<Form.Row>
-					<Form.Group as={Col} controlId="formGridEmail">
-						<Form.Label>Email</Form.Label>
-						<Form.Control
+					<Form.Group controlId="formGridEmail">
+						<Form.Label><strong>Email</strong></Form.Label>
+						<Form.Control className="form-control-login"
 							onChange={setValue}
 							name="email"
 							type="email"
 							placeholder="Enter email"
 						/>
 					</Form.Group>
-
-					<Form.Group as={Col} controlId="formGridEmail">
-						<Form.Label>Password</Form.Label>
-						<Form.Control
+					<Form.Group controlId="formGridEmail">
+						<Form.Label><strong>Password</strong></Form.Label>
+						<Form.Control className="form-control-login"
 							name="password"
 							onChange={setValue}
 							type="password"
@@ -79,15 +80,19 @@ export default function Login() {
 						/>
 					</Form.Group>
 				</Form.Row>
-
-				<Button
+				<Button className="login-button"
 					variant="primary"
 					type="button"
 					onClick={login}
-					style={{ margin: "0 43%" }}
-				>
-					Login
+				>Login
 				</Button>
+				<Link to="/signup" ><Button className="login-signup-button"
+					variant="primary"
+					type="button"
+					onClick={login}
+				>SIGNUP
+				</Button>
+				</Link>
 			</Form>
 		</div>
 	);

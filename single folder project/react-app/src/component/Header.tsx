@@ -2,7 +2,10 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LogoutOutlined } from "@ant-design/icons";
 import { Context } from "../context/Context";
-import { Form, Button, FormControl, Col } from "react-bootstrap";
+import { Form, FormControl, Col } from "react-bootstrap";
+import { Button, Tooltip } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+
 
 import {
 	MDBContainer,
@@ -19,6 +22,8 @@ import {
 // npm i antd @types/antd @ant-design/icons mdb-react-ui-kit react-bootstrap
 
 export default function Header() {
+	document.body.style.backgroundColor = "white";
+
 	const [showBasic, setShowBasic] = useState(false);
 	const [loggedOut, setloggedOut] = useState(false);
 
@@ -104,14 +109,27 @@ export default function Header() {
 									</MDBNavbarLink>
 								</MDBNavbarItem>
 							)}
-
+							<MDBNavbarItem>
+									<MDBNavbarLink tabIndex={-1} aria-disabled="true">
+										<Link className="link-tag" to="/contactus">
+											Contact Us
+										</Link>
+									</MDBNavbarLink>
+							</MDBNavbarItem>
+							<MDBNavbarItem>
+									<MDBNavbarLink tabIndex={-1} aria-disabled="true">
+										<Link className="link-tag" to="/profile">
+											Profile
+										</Link>
+									</MDBNavbarLink>
+							</MDBNavbarItem>
 							<Form.Group as={Col} controlId="formGridState">
 								<Form.Control
 									name="category"
 									as="select"
 									defaultValue="Choose..."
 									onChange={setCategoryValue}
-									style={{ width: "100px" }}
+									style={{ width: "100px", padding:"0" }}
 								>
 									<option value="">Category...</option>
 									<option value="Javascript">Javascript</option>
@@ -129,13 +147,14 @@ export default function Header() {
 							<FormControl
 								type="text"
 								placeholder="Search"
-								style={{ margin: "0 0 0 -50%" }}
+								style={{ margin: "0% 0 0 -50%" }}
 								className="mr-sm-1"
 								onChange={setValue}
 							/>
-							<Button type="submit" style={{ margin: "-16% 0 0 40%" }}>
-								Submit
-							</Button>
+							<Tooltip title="search">
+								<Button type="primary" shape="circle" icon={<SearchOutlined style={{ fontSize: '23px' }} />} />
+							</Tooltip>
+						</Form>
 							{state.loggedIn && (
 								<LogoutOutlined
 									onClick={logout}
@@ -148,7 +167,7 @@ export default function Header() {
 									}}
 								/>
 							)}
-						</Form>
+						
 					</MDBCollapse>
 				</MDBContainer>
 			</MDBNavbar>

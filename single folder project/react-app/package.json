@@ -1,5 +1,5 @@
 {
-  "name": "react-frontend",
+  "name": "react-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,22 +7,22 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@types/antd": "^1.0.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
     "@types/react-bootstrap": "^0.32.25",
-    "@types/react-dom": "^17.0.0",
     "antd": "^4.15.6",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "bootstrap-icons": "^1.5.0",
     "mdb-react-ui-kit": "^1.0.0-beta5",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "typescript": "^4.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -50,6 +50,10 @@
     ]
   },
   "devDependencies": {
+    "@types/antd": "^1.0.0",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "@types/react-router": "^5.1.14",
     "@types/react-router-dom": "^5.1.7"
   }
 }
