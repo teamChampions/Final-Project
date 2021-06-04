@@ -10,5 +10,6 @@ var userRouter = express_1.default.Router();
 userRouter
     .get("/", users_controller_1.getAllusers)
     .post("/", users_controller_1.signup)
-    .post("/login", users_controller_1.login);
+    .post("/login", users_controller_1.login)
+    .get("/profile", users_controller_1.getCurrentUserProfile);
 exports.default = userRouter;

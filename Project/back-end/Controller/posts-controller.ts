@@ -146,6 +146,24 @@ const deletePost = async (req: any, res: any) => {
 	}
 };
 
+const getCommentsForPost = async (req: any, res: any) => {
+	try {
+		const postComments = await PostsModel.findById(req.params.id)
+			.populate({ path: "users", select: "_id userName" })
+			.populate({
+				path: "comments",
+				options: { sort: { createdAt: "desc" } },
+				populate: {
+					path: "user",
+					select: "_id userName",
+				},
+			});
+		res.status(200).send(postComments);
+	} catch (err) {
+		res.status(404).send("Not found any comments");
+	}
+};
+
 export {
 	getAllposts,
 	addPost,
@@ -154,4 +172,5 @@ export {
 	getPostsByUser,
 	uploadPost,
 	deletePost,
+	getCommentsForPost,
 };

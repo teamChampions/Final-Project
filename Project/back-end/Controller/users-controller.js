@@ -50,10 +50,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isAuthorised = exports.login = exports.signup = exports.getAllusers = void 0;
+exports.getCurrentUserProfile = exports.isAuthorised = exports.login = exports.signup = exports.getAllusers = void 0;
 var users_schema_1 = __importDefault(require("../Model/users-schema"));
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var posts_schema_1 = __importDefault(require("../Model/posts-schema"));
 var getAllusers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var data, err_1;
     return __generator(this, function (_a) {
@@ -216,3 +217,27 @@ var isAuthorised = function (req, res, next) { return __awaiter(void 0, void 0, 
     });
 }); };
 exports.isAuthorised = isAuthorised;
+var getCurrentUserProfile = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userProfileDeatils, err_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, posts_schema_1.default.find({
+                        users: req.user._id,
+                    })
+                        .populate({ path: "users", select: "_id userName email profileImage" })
+                        .sort({ createdAt: "desc" })];
+            case 1:
+                userProfileDeatils = _a.sent();
+                res.status(200).send(userProfileDeatils);
+                return [3 /*break*/, 3];
+            case 2:
+                err_6 = _a.sent();
+                res.status(404).send("User Not Found");
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getCurrentUserProfile = getCurrentUserProfile;

@@ -14,6 +14,7 @@ postRouter
     .get("/category/:category", posts_controller_1.getAllpostsByCategory)
     .get("/user/:id", posts_controller_1.getUserPosts)
     .delete("/:id", users_controller_1.isAuthorised, posts_controller_1.deletePost)
-    .get("/users/:user_name", posts_controller_1.getPostsByUser);
+    .get("/users/:user_name", posts_controller_1.getPostsByUser)
+    .get("/post/comments/:id", posts_controller_1.getCommentsForPost);
 // postRouter.route("/posts").post(isAuthorised, addPost);
 exports.default = postRouter;

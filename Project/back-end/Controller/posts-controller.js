@@ -50,7 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletePost = exports.uploadPost = exports.getPostsByUser = exports.getUserPosts = exports.getAllpostsByCategory = exports.addPost = exports.getAllposts = void 0;
+exports.getCommentsForPost = exports.deletePost = exports.uploadPost = exports.getPostsByUser = exports.getUserPosts = exports.getAllpostsByCategory = exports.addPost = exports.getAllposts = void 0;
 var posts_schema_1 = __importDefault(require("../Model/posts-schema"));
 var users_schema_1 = __importDefault(require("../Model/users-schema"));
 var comment_schema_1 = __importDefault(require("../Model/comment-schema"));
@@ -253,3 +253,32 @@ var deletePost = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.deletePost = deletePost;
+var getCommentsForPost = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var postComments, err_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, posts_schema_1.default.findById(req.params.id)
+                        .populate({ path: "users", select: "_id userName" })
+                        .populate({
+                        path: "comments",
+                        options: { sort: { createdAt: "desc" } },
+                        populate: {
+                            path: "user",
+                            select: "_id userName",
+                        },
+                    })];
+            case 1:
+                postComments = _a.sent();
+                res.status(200).send(postComments);
+                return [3 /*break*/, 3];
+            case 2:
+                err_6 = _a.sent();
+                res.status(404).send("Not found any comments");
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getCommentsForPost = getCommentsForPost;
