@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "antd/dist/antd.css";
+import "../node_modules/font-awesome/css/font-awesome.min.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from 'react-redux';
 import { store } from './store/store';

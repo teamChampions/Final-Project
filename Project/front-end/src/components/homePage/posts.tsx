@@ -29,9 +29,6 @@ export default function PostComponent() {
         return (
           <div className="post-card">
             <CardComponent data={value} flag={state.loggedInUser}></CardComponent>
-            {/* {value.comments.map((comment: any) => (
-              <CommentComponent key={comment._id} comment={comment} />
-            ))} */}
           </div>
         );
       })}

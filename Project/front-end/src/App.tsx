@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+import AddCommentComponent from "./components/DisplayPostPage/addCommentComponent";
 import Header from "./components/HeaderComponent/Header";
 import PostComponent from "./components/homePage/posts";
 
@@ -21,12 +22,14 @@ function App() {
             <Header></Header>
             <PostComponent></PostComponent>
           </Route>
-          {/* <Route exact path="/signup">
-            <Signup></Signup>
+           <Route exact path="/addComment">
+           <Header></Header>
+            <AddCommentComponent></AddCommentComponent>
           </Route>
-          <Route exact path="/signup">
+         {/* <Route exact path="/signup">
             <Signup></Signup> 
           </Route>*/}
+          
         </Switch>
       </Router>
     </div>

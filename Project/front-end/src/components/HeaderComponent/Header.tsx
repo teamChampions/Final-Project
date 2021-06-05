@@ -100,7 +100,7 @@ export default function Header() {
             <div className="row">
               <div className="col-sm-3">
                 <MDBNavbarBrand>
-                  <Link className="link-tag" to="/home">
+                  <Link className="link-tag" to="/home" title="Home">
                     Skill Media
                   </Link>
                 </MDBNavbarBrand>

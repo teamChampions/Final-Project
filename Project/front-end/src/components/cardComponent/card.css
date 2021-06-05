@@ -12,3 +12,7 @@
 .post-card:hover {
 	transform: scale(1.03);
 }
+
+.size{
+	font-size:28px !important;
+}
