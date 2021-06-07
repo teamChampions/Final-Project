@@ -3,7 +3,6 @@
 }
 
 .link-tag {
-  color: #534ebf !important;
   font-family: Pattaya, sans-serif;
   font-weight: bolder;
   text-decoration: none !important;
@@ -11,7 +10,6 @@
 .search-button {
   margin-left: 10px;
   display: table;
-  background-color: #534ebf !important;
 }
 
 .navbar{

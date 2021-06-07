@@ -9,7 +9,7 @@ export default function AddCommentComponent({}: Props) {
 
   console.log("in add comment");
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div className="comment-body">
       <div className="conatiner">
         <div className="row">
           <div className="col-sm-6 post-div">

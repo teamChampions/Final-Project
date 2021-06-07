@@ -22,8 +22,8 @@ const CommentComponent = (props: Props) => {
             <p>{props.comment.comment}</p>
             <div className="d-flex justify-content-end">
               <div className="likes">
-				<small className="like-count">Likes: 5</small>
-			  <i className="fa fa-thumbs-o-up color" aria-hidden="true"></i>
+                <small className="like-count">Likes: 5</small>
+                <i className="fa fa-thumbs-o-up color" aria-hidden="true"></i>
               </div>
             </div>
           </div>

@@ -3,8 +3,8 @@ import "./App.css";
 import AddCommentComponent from "./components/DisplayPostPage/addCommentComponent";
 import Header from "./components/HeaderComponent/Header";
 import PostComponent from "./components/homePage/posts";
-
 import Login from "./components/loginPage/login";
+import Profile from "./components/profileComponent/Profile";
 import Signup from "./components/signupPage/signupForm";
 
 function App() {
@@ -25,6 +25,10 @@ function App() {
            <Route exact path="/addComment">
            <Header></Header>
             <AddCommentComponent></AddCommentComponent>
+          </Route>
+          <Route exact path="/myprofile">
+           <Header></Header>
+            <Profile></Profile>
           </Route>
          {/* <Route exact path="/signup">
             <Signup></Signup> 

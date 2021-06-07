@@ -15,6 +15,11 @@ import {
 } from "mdb-react-ui-kit";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import ToggleBtn from "../../styles/toggleButton";
+import { useDarkTheme } from "../../styles/useDarkTheme";
+
+import styled, {ThemeProvider} from 'styled-components';
+import {GlobalStyles, lightTheme, darkTheme} from '../../styles/globalStyles';
 
 // npm i antd @types/antd @ant-design/icons mdb-react-ui-kit react-bootstrap
 
@@ -23,6 +28,10 @@ export default function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
   const state: any = useSelector((state:any) => state.user);
+
+  const[theme, toggleTheme] = useDarkTheme();
+  const themeMode = theme==='light'?lightTheme:darkTheme
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -38,25 +47,8 @@ export default function Header() {
   const content = (
     <div>
       <p>
-        <Link className="link-tag" to="/myQuestions">
-          My Questions
-        </Link>
-      </p>
-
-      <p>
-        <Link className="link-tag" to="/myAnswers">
-          My Answers
-        </Link>
-      </p>
-
-      <p>
-        <Link className="link-tag" to="/myLikedQuestions">
-          My Liked Questions
-        </Link>
-      </p>
-      <p>
-        <Link className="link-tag" to="/myLikedAnswers">
-          My Liked Answers
+        <Link className="link-tag" to="/myprofile">
+          Profile
         </Link>
       </p>
 
@@ -93,8 +85,10 @@ export default function Header() {
     }
   };
   return (
+    <ThemeProvider theme={themeMode}>
+    <GlobalStyles></GlobalStyles>
     <div>
-      <MDBNavbar sticky={true} expand="lg" light bgColor="white">
+      <MDBNavbar sticky={true} expand="lg" light >
         <MDBContainer fluid >
           <div className="container-fluid">
             <div className="row">
@@ -123,13 +117,13 @@ export default function Header() {
                       <Button
                         shape="circle"
                         className="search-button"
-                        icon={<SearchOutlined style={{color:"white"}}/>}
+                        icon={<SearchOutlined/>}
                       />
                     </Tooltip>
                   </div>
                 {/* </MDBCollapse> */}
               </div>
-              <div className="col-sm-3">
+              <div className="col-sm-3" >
                {/*  <MDBCollapse> */}
                   {state.loggedInUser && (
                     <Popover
@@ -143,6 +137,9 @@ export default function Header() {
                       />
                     </Popover>
                   )}
+                  <div style={{ display:"inline-block",float: "right", marginRight:"10%"}}>
+                  <ToggleBtn theme={theme} toggleTheme={toggleTheme}></ToggleBtn>
+                </div>
                 {/* </MDBCollapse> */}
               </div>
             </div>
@@ -150,6 +147,7 @@ export default function Header() {
         </MDBContainer>
       </MDBNavbar>
     </div>
+    </ThemeProvider>
   );
 }
 
