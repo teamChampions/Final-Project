@@ -5,6 +5,7 @@ import CommentComponent from "../commentComponent/commentComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { displayAllPosts, getPostsByCategory } from "../../services/services";
 import CardComponent from "../cardComponent/card";
+import { AddPostComponent } from "../addPostComponent/addPostComponent";
 /* import AddComment from "./addComment"; */
 
 export default function PostComponent() {
@@ -24,6 +25,7 @@ export default function PostComponent() {
 
   return (
     <div>
+      <AddPostComponent></AddPostComponent>
       {!state.posts.length && <Empty style={{ margin: "10% auto" }} />}
       {state.posts.map((value: any, index: any) => {
         return (
