@@ -108,7 +108,10 @@ const getCurrentUserProfile = async (req: any, res: any) => {
 		const userProfileDeatils = await PostsModel.find({
 			users: req.user._id,
 		})
-			.populate({ path: "users", select: "_id userName email profileImage" })
+			.populate({
+				path: "users",
+				select: "_id userName email profileImage about",
+			})
 			.sort({ createdAt: "desc" });
 		res.status(200).send(userProfileDeatils);
 	} catch (err) {

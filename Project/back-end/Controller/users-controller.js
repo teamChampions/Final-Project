@@ -226,7 +226,10 @@ var getCurrentUserProfile = function (req, res) { return __awaiter(void 0, void 
                 return [4 /*yield*/, posts_schema_1.default.find({
                         users: req.user._id,
                     })
-                        .populate({ path: "users", select: "_id userName email profileImage" })
+                        .populate({
+                        path: "users",
+                        select: "_id userName email profileImage about",
+                    })
                         .sort({ createdAt: "desc" })];
             case 1:
                 userProfileDeatils = _a.sent();

@@ -4,6 +4,7 @@ import {
 	signup,
 	login,
 	getCurrentUserProfile,
+	isAuthorised,
 } from "../Controller/users-controller";
 const userRouter = express.Router();
 
@@ -12,6 +13,6 @@ userRouter
 	.get("/", getAllusers)
 	.post("/", signup)
 	.post("/login", login)
-	.get("/profile", getCurrentUserProfile);
+	.post("/profile", isAuthorised, getCurrentUserProfile);
 
 export default userRouter;
