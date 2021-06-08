@@ -79,7 +79,7 @@ export default function Header() {
 	return (
 		<ThemeProvider theme={themeMode}>
 			<GlobalStyles></GlobalStyles>
-			<div>
+			<div className="fix-header">
 				<MDBNavbar sticky={true} expand="lg" light>
 					<MDBContainer fluid>
 						<div className="container-fluid">

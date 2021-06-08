@@ -7,16 +7,15 @@ import { displayAllPosts, getPostsByCategory } from "../../services/services";
 import CardComponent from "../cardComponent/card";
 import { AddPostComponent } from "../addPostComponent/addPostComponent";
 /* import AddComment from "./addComment"; */
-
+import "./home.css"
 export default function PostComponent() {
- 
   let result: any;
   const dispatch = useDispatch();
   const state: any = useSelector((state: any) => state.posts);
-    result = async () => {
-      let data = await displayAllPosts();
-      dispatch(data);
-    };
+  result = async () => {
+    let data = await displayAllPosts();
+    dispatch(data);
+  };
   useEffect(() => {
     result();
   }, []);
@@ -26,14 +25,19 @@ export default function PostComponent() {
   return (
     <div>
       <AddPostComponent></AddPostComponent>
-      {!state.posts.length && <Empty style={{ margin: "10% auto" }} />}
-      {state.posts.map((value: any, index: any) => {
-        return (
-          <div className="post-card">
-            <CardComponent data={value} flag={state.loggedInUser}></CardComponent>
-          </div>
-        );
-      })}
+      <div className="posts-div">
+        {!state.posts.length && <Empty style={{ margin: "10% auto" }} />}
+        {state.posts.map((value: any, index: any) => {
+          return (
+            <div className="post-card">
+              <CardComponent
+                data={value}
+                flag={state.loggedInUser}
+              ></CardComponent>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
