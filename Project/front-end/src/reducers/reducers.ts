@@ -3,6 +3,7 @@ import {
 	LOGGED_IN,
 	LOGGED_OUT,
 	USER_PROFILE,
+	POST_TAGS,
 } from "../store/constants";
 
 const initialStateOfUser = {
@@ -35,6 +36,7 @@ const initialStateOfPost = {
 	posts: [],
 	searchedPosts: [],
 	searchParams: {},
+	tags: [],
 };
 
 const postsReducer = (currentState = initialStateOfPost, action: any): any => {
@@ -44,6 +46,13 @@ const postsReducer = (currentState = initialStateOfPost, action: any): any => {
 			return {
 				...currentState,
 				posts: action.payload,
+			};
+
+		case POST_TAGS:
+			console.log(action.payload);
+			return {
+				...currentState,
+				tags: action.payload,
 			};
 		default:
 			return currentState;

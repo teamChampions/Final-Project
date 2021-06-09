@@ -80,7 +80,6 @@ const addPost = async (data: any) => {
 				},
 			}
 		);
-
 		return { type: "ADD_POST", payload: res.data };
 	} catch (err) {
 		return null;

@@ -66,6 +66,12 @@ export default function Header() {
 		dispatch({ type: "SEARCH_PARAMS", payload: value });
 	};
 
+	const checkKey = (e: any) => {
+		if (e.charCode === 13) {
+			console.log(e);
+		}
+	};
+
 	const setValue = (e: any) => {
 		let name: any = e.target?.name;
 		let value: any = e.target?.value;
@@ -104,6 +110,7 @@ export default function Header() {
 											placeholder="Search"
 											className="mr-sm-1 search-input"
 											onChange={setValue}
+											onKeyPress={checkKey}
 										/>
 										{/* <Tooltip title="search">
 											<Button

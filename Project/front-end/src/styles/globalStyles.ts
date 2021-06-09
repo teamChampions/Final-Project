@@ -112,7 +112,17 @@ export const GlobalStyles = createGlobalStyle<{
         border:1px dashed  ${({ theme }) => theme.atomColor} !important;
         color: ${({ theme }) => theme.atomColor} !important;
     }
+    .accordion-button {
+        color: ${({ theme }) => theme.titletagCommentIcons} !important;
+        background-color:${({ theme }) => theme.componentColor} !important;
+    }
 
+    .accordion-button:not(.collapsed) {
+        background-color:${({ theme }) => theme.componentColor} !important;
+    }
+    .accordion-body{
+        background-color:${({ theme }) => theme.componentColor} !important;
+    }
 `;
 
 export const lightTheme = {
@@ -134,5 +144,5 @@ export const darkTheme = {
 	componentColor: "#333",
 	actions: "white",
 	commenthover: "#333",
-	titletagCommentIcons: "linen",
+	titletagCommentIcons: "white",
 };

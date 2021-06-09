@@ -2,35 +2,44 @@ import { Tag, Input, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./hashTagComponent.css";
 import React, { ReactElement, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {}
 
 export default function HashTagsComponent({}: Props): ReactElement {
 	let inputRef = useRef<HTMLInputElement>(null);
 	let editInputRef = useRef<HTMLInputElement>(null);
-	const [tagState, setTagState] = useState({
-		tags: ["Tag 2", "Tag 3"],
+	const dispatch = useDispatch();
+
+	const [tagState, setTagState] = useState<any>({
+		tags: [],
 		inputVisible: false,
 		inputValue: "",
 		editInputIndex: -1,
 		editInputValue: "",
 	});
+
 	const handleClose = (removedTag: any) => {
-		const tags = tagState.tags.filter((tag) => tag !== removedTag);
+		const tags = tagState.tags.filter((tag: any) => tag !== removedTag);
 		console.log(tags);
 		setTagState({ ...tagState, tags });
 	};
+
 	const showInput = () => {
 		setTagState({ ...tagState, inputVisible: true });
 		inputRef.current?.focus();
 	};
+
 	const handleInputChange = (e: any) => {
 		setTagState({ ...tagState, inputValue: e.target.value });
+		console.log(tagState.inputValue);
 	};
+
 	const handleInputConfirm = () => {
 		let { inputValue, tags } = tagState;
 		if (inputValue && tags.indexOf(inputValue) === -1) {
 			tags = [...tags, inputValue];
+			dispatch({ type: "POST_TAGS", payload: tags });
 		}
 		console.log(tags);
 		setTagState({
@@ -40,9 +49,11 @@ export default function HashTagsComponent({}: Props): ReactElement {
 			inputValue: "",
 		});
 	};
+
 	const handleEditInputChange = (e: any) => {
 		setTagState({ ...tagState, editInputValue: e.target.value });
 	};
+
 	const handleEditInputConfirm = () => {
 		let { tags, editInputIndex, editInputValue } = tagState;
 		const newTags = [...tags];
@@ -54,6 +65,7 @@ export default function HashTagsComponent({}: Props): ReactElement {
 			editInputValue: "",
 		});
 	};
+
 	const saveInputRef = (input: any) => {
 		inputRef = input;
 	};
