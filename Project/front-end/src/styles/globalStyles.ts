@@ -11,6 +11,8 @@ export const GlobalStyles = createGlobalStyle<{
 		themeShadow: string;
 		componentColor: string;
 		atomColor: string;
+        boxShadow:string;
+        border:string;
 	};
 }>`
     body{
@@ -33,6 +35,8 @@ export const GlobalStyles = createGlobalStyle<{
     .post-card{
         background:${({ theme }) => theme.componentColor};
         color:${({ theme }) => theme.text};
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
+        border:${({ theme }) => theme.border} !important;
     }
     .ant-card-body{
         background:${({ theme }) => theme.componentColor};
@@ -70,6 +74,7 @@ export const GlobalStyles = createGlobalStyle<{
         background:${({ theme }) => theme.body};
         color:${({ theme }) => theme.text};
         transition: all .5s linear;
+        border:${({ theme }) => theme.border} !important;
     }
     .add-comment{
         color:black;
@@ -123,6 +128,16 @@ export const GlobalStyles = createGlobalStyle<{
     .accordion-body{
         background-color:${({ theme }) => theme.componentColor} !important;
     }
+    span{
+        color: ${({ theme }) => theme.text};
+
+    }
+    .post-owner,.image{
+        box-shadow:${({ theme }) => theme.boxShadow}
+    }
+    .ant-card{
+       border:${({ theme }) => theme.border} !important;
+    }
 `;
 
 export const lightTheme = {
@@ -134,15 +149,19 @@ export const lightTheme = {
 	actions: "rgba(0, 0, 0, 0.45)",
 	commenthover: "white",
 	titletagCommentIcons: "#534ebf",
+    boxShadow: "0px 0px 4px 0px rgb(200, 200, 200)",
+    border:"none",
 };
 
 export const darkTheme = {
-	body: "#121212",
+	body: "#0d1117",
 	text: "#fff",
-	atomColor: "#3027e2",
-	menu: "#333",
-	componentColor: "#333",
+	atomColor: "white",
+	menu: "#161b22",
+	componentColor: "#161b22",
 	actions: "white",
-	commenthover: "#333",
+	commenthover: "#161b22",
 	titletagCommentIcons: "white",
+    boxShadow:"none",
+    border:"1px solid #30363d"
 };

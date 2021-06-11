@@ -12,6 +12,8 @@ import TextArea from "antd/lib/input/TextArea";
 import HashTagsComponent from "./hashTagsComponent";
 import "./addPost.css";
 import { useSelector, useDispatch } from "react-redux";
+import { addPost } from "../../services/services";
+import AlertComponent from "../alertComponent";
 interface Props {}
 
 export const AddPostComponent = (props: Props) => {
@@ -41,22 +43,34 @@ export const AddPostComponent = (props: Props) => {
 	// const classes = useStyles();
 
 	const [filePick, setfilePick] = useState<any>({});
-
+	const [Status, setStatus] = useState<any>({})
 	const fileByAntd = (e: any) => {
-		console.log(e.file);
-		setfilePick(e.file);
+		console.log(e.target.files[0]);
+		setfilePick(e.target.files[0]);
 	};
 
-	const onSubmit = (e: any) => {
+	const onSubmit = async(e: any) => {
 		e.preventDefault();
 		formData.append("description", description);
-		formData.append("tags", state.tags);
-		formData.append("file", filePick);
-		console.log(formData);
+		state.tags.forEach((element:any) => {
+			formData.append("tags[]", element);
+		});
+		formData.append("image", filePick);
+		try{
+			const res=await addPost(formData)
+			setStatus({message:"Posted successfully",type:"success",flag:true})
+
+		}catch(err){
+			setStatus({message:err.message,type:"error",flag:true})
+		}
 	};
 
 	return (
 		<div className="fix-add-post">
+			{
+				Status.flag && 
+			<AlertComponent message={Status.message} type={Status.type}/>
+			}
 			<div className="accordion my-accordian" id="accordionExample">
 				<div className="accordion-item">
 					<button
@@ -91,7 +105,7 @@ export const AddPostComponent = (props: Props) => {
 										<HashTagsComponent></HashTagsComponent>
 									</div>
 									<div className="upload-post-container">
-										<Upload
+										{/* <Upload
 											action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
 											listType="picture"
 											className="upload-list-inline"
@@ -99,7 +113,8 @@ export const AddPostComponent = (props: Props) => {
 											// defaultFileList={[...fileList]}
 										>
 											<UpButton icon={<UploadOutlined />}>Upload</UpButton>
-										</Upload>
+										</Upload> */}
+										<input type="file" onChange={fileByAntd}></input>
 									</div>
 									<Button
 										variant="contained"

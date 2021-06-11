@@ -12,7 +12,7 @@ export default function CardComponent({ data, flag }: Props) {
   const { Meta } = Card;
   const history=useHistory()
   const handleAddComment=(e:any)=>{
-    history.push("/addComment",{id:data._id})
+    history.push(`/addComment/forPost/${data._id}`)
   }
   return (
     <Card

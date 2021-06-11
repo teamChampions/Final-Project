@@ -150,6 +150,7 @@ var addPost = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 console.log("User post", req.body);
+                console.log("tell me", req.file.filename);
                 return [4 /*yield*/, posts_schema_1.default.create(__assign(__assign({}, req.body), { image: POSTS_PATH + "/" + req.file.filename || "", users: req.user._id }))];
             case 1:
                 data = _a.sent();

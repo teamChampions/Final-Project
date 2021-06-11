@@ -77,7 +77,8 @@ const getAllpostsByCategory = async (req: any, res: any) => {
 const addPost = async (req: any, res: any) => {
 	try {
 		console.log("User post", req.body);
-
+		console.log("tell me",req.file.filename)
+		
 		const data = await PostsModel.create({
 			...req.body,
 			image: POSTS_PATH + "/" + req.file.filename || "",
@@ -173,4 +174,5 @@ export {
 	uploadPost,
 	deletePost,
 	getCommentsForPost,
+
 };

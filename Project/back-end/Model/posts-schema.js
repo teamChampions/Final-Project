@@ -16,9 +16,11 @@ var PostsSchema = new mongoose_1.default.Schema({
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "users",
     },
-    category: {
-        type: String,
-    },
+    tags: [
+        {
+            type: String,
+        }
+    ],
     comments: [
         {
             type: mongoose_1.default.Schema.Types.ObjectId,

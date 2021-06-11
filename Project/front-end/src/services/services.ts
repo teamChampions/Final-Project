@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ALL_POSTS, LOGGED_IN } from "../store/constants";
+import { ALL_POSTS, LOGGED_IN, POST_DETAILS } from "../store/constants";
 const loginUser = async (data: any) => {
 	try {
 		let response = await axios.post(
@@ -73,14 +73,14 @@ const addPost = async (data: any) => {
 	try {
 		const res = await axios.post(
 			`http://localhost:5000/api/posts`,
-			JSON.stringify(data),
+			data,
 			{
 				headers: {
 					Authorization: localStorage.getItem("token"),
 				},
 			}
 		);
-		return { type: "ADD_POST", payload: res.data };
+		return res
 	} catch (err) {
 		return null;
 	}
@@ -103,6 +103,17 @@ const currentUserProfile = async (data: any) => {
 	}
 };
 
+const getPostDetails=async(postid:any)=>{
+	try{
+		const postDetails=await axios.get(`http://localhost:5000/api/posts/comments/postid/${postid}`)
+		console.log(postDetails.data)
+		return {type:POST_DETAILS,payload:postDetails.data}
+	}catch(err){
+		return err
+	}
+
+
+}
 export {
 	loginUser,
 	signupUser,
@@ -111,4 +122,5 @@ export {
 	addPost,
 	addComment,
 	currentUserProfile,
+	getPostDetails
 };

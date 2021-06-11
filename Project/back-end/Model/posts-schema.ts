@@ -14,9 +14,11 @@ const PostsSchema = new mongoose.Schema(
 			ref: "users",
 		},
 
-		category: {
-			type: String,
-		},
+		tags: [
+			{
+				type: String,
+			}
+		],
 		comments: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

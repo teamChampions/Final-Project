@@ -7,7 +7,7 @@ import {
 	getPostsByUser,
 	uploadPost,
 	deletePost,
-	getCommentsForPost,
+	getCommentsForPost
 } from "../Controller/posts-controller";
 import { isAuthorised } from "../Controller/users-controller";
 const postRouter = express.Router();
@@ -20,7 +20,8 @@ postRouter
 	.get("/user/:id", getUserPosts)
 	.delete("/:id", isAuthorised, deletePost)
 	.get("/users/:user_name", getPostsByUser)
-	.get("/post/comments/:id", getCommentsForPost);
+	.get("/comments/postid/:id", getCommentsForPost)
+
 
 // postRouter.route("/posts").post(isAuthorised, addPost);
 

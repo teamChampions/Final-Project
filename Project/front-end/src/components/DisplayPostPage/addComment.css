@@ -41,7 +41,7 @@
 }
 
 .input-comment {
-	margin-top: 10px;
+	margin:10px;
 	border: 1px solid #80808066;
 	padding: 8px;
 	border-radius: 20px;
@@ -80,4 +80,28 @@
 	margin-left: 3%;
 	display: grid;
 	grid-template-columns: 85% 15%;
+}
+
+.likes-comments-count{
+	margin-left:	6px;
+}
+
+.comment-body{
+	margin-top:5%;
+}
+
+@media screen and (max-width: 559px) {
+	.post-owner{
+		width:100%;
+	}
+	.comment-section{
+		width:100%;
+	}
+	.comment-body{
+		margin-top:35%
+	}
+	.post-image-section {
+    padding: 2%;
+    margin: 0 1%;
+}
 }

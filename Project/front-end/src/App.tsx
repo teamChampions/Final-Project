@@ -22,7 +22,7 @@ function App() {
             <Header></Header>
             <PostComponent></PostComponent>
           </Route>
-           <Route exact path="/addComment">
+           <Route exact path="/addComment/forPost/:postid">
            <Header></Header>
             <AddCommentComponent></AddCommentComponent>
           </Route>

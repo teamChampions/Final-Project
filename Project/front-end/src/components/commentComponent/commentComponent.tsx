@@ -5,12 +5,12 @@ import "./comment.css";
 interface Props {
   comment?: any;
 }
-const CommentComponent = (props: Props) => {
+const CommentComponent = ({comment}: Props) => {
   return (
     <div className="comment-main-div">
       <Comment
         className="comment-div"
-        author={<a>{props.comment.user.userName}</a>}
+        author={<a>{comment.user.userName}</a>}
         avatar={
           <Avatar
             src="https://eshendetesia.com/images/user-profile.png"
@@ -19,18 +19,18 @@ const CommentComponent = (props: Props) => {
         }
         content={
           <div>
-            <p>{props.comment.comment}</p>
+            <p>{comment.comment}</p>
             <div className="d-flex justify-content-end">
               <div className="likes">
-                <small className="like-count">Likes: 5</small>
+                <small className="like-count">{comment.likes.length}</small>
                 <i className="fa fa-thumbs-o-up color" aria-hidden="true"></i>
               </div>
             </div>
           </div>
         }
         datetime={
-          <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-            <span>{moment().fromNow()}</span>
+          <Tooltip title={moment(comment.createdAt).format("YYYY-MM-DD HH:mm:ss")}>
+            <span>{moment(comment.createdAt).fromNow()}</span>
           </Tooltip>
         }
       />

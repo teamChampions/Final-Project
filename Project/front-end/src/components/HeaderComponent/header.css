@@ -1,9 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 .tooltip-time {
 	float: right !important;
 }
 
 .link-tag {
-	font-family: Pattaya, sans-serif;
+	font-family: "Varela Round", sans-serif !important;;
 	font-weight: bolder;
 	text-decoration: none !important;
 }
