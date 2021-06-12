@@ -43,34 +43,36 @@ export const AddPostComponent = (props: Props) => {
 	// const classes = useStyles();
 
 	const [filePick, setfilePick] = useState<any>({});
-	const [Status, setStatus] = useState<any>({})
+	const [Status, setStatus] = useState<any>({});
 	const fileByAntd = (e: any) => {
 		console.log(e.target.files[0]);
 		setfilePick(e.target.files[0]);
 	};
 
-	const onSubmit = async(e: any) => {
+	const onSubmit = async (e: any) => {
 		e.preventDefault();
 		formData.append("description", description);
-		state.tags.forEach((element:any) => {
+		state.tags.forEach((element: any) => {
 			formData.append("tags[]", element);
 		});
 		formData.append("image", filePick);
-		try{
-			const res=await addPost(formData)
-			setStatus({message:"Posted successfully",type:"success",flag:true})
-
-		}catch(err){
-			setStatus({message:err.message,type:"error",flag:true})
+		try {
+			const res = await addPost(formData);
+			setStatus({
+				message: "Posted successfully",
+				type: "success",
+				flag: true,
+			});
+		} catch (err) {
+			setStatus({ message: err.message, type: "error", flag: true });
 		}
 	};
 
 	return (
 		<div className="fix-add-post">
-			{
-				Status.flag && 
-			<AlertComponent message={Status.message} type={Status.type}/>
-			}
+			{Status.flag && (
+				<AlertComponent message={Status.message} type={Status.type} />
+			)}
 			<div className="accordion my-accordian" id="accordionExample">
 				<div className="accordion-item">
 					<button
@@ -123,7 +125,7 @@ export const AddPostComponent = (props: Props) => {
 										onClick={onSubmit}
 									>
 										<div className="d-flex">
-											<div>{"Post"}</div>
+											<div>Post</div>
 											<div className="icon-container">
 												<i
 													className="fa fa-paper-plane icon"

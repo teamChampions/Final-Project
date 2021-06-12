@@ -24,14 +24,17 @@ const addComment = async (req: any, res: any) => {
 const deleteComment = async (req: any, res: any) => {
 	try {
 		const comment: any = await comments.findOne({ _id: req.params.id });
-		
+
 		if (comment.user == req.user.id) {
 			const postId = comment.post;
 			comment.remove();
-			const post = await PostsModel.findOneAndUpdate(
+			const post: any = await PostsModel.findOneAndUpdate(
 				{ _id: postId },
 				{ $pull: { comments: req.params.id } }
 			);
+
+			console.log(post.comments.length);
+
 			res.status(200).json(post);
 		} else {
 			res.status(404).send("Not found");
@@ -43,7 +46,6 @@ const deleteComment = async (req: any, res: any) => {
 
 const getUserComments = async (req: any, res: any) => {
 	try {
-
 		const userComments = await comments
 			.find({ user: req.params.id })
 			.populate({ path: "user", select: "_id userName" });

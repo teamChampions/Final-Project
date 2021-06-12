@@ -7,37 +7,37 @@ import { displayAllPosts, getPostsByCategory } from "../../services/services";
 import CardComponent from "../cardComponent/card";
 import { AddPostComponent } from "../addPostComponent/addPostComponent";
 /* import AddComment from "./addComment"; */
-import "./home.css"
+import "./home.css";
 export default function PostComponent() {
-  let result: any;
-  const dispatch = useDispatch();
-  const state: any = useSelector((state: any) => state.posts);
-  result = async () => {
-    let data = await displayAllPosts();
-    dispatch(data);
-  };
-  useEffect(() => {
-    result();
-  }, []);
+	let result: any;
+	const dispatch = useDispatch();
+	const state: any = useSelector((state: any) => state.posts);
+	result = async () => {
+		let data = await displayAllPosts();
+		dispatch(data);
+	};
+	useEffect(() => {
+		result();
+	}, []);
 
-  console.log(state.posts);
+	console.log(state.posts);
 
-  return (
-    <div>
-      <AddPostComponent></AddPostComponent>
-      <div className="posts-div">
-        {!state.posts.length && <Empty style={{ margin: "10% auto" }} />}
-        {state.posts.map((value: any, index: any) => {
-          return (
-            <div className="post-card">
-              <CardComponent
-                data={value}
-                flag={state.loggedInUser}
-              ></CardComponent>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+	return (
+		<div className="main-container">
+			<AddPostComponent></AddPostComponent>
+			<div className="posts-div">
+				{!state.posts.length && <Empty style={{ margin: "10% auto" }} />}
+				{state.posts.map((value: any, index: any) => {
+					return (
+						<div className="post-card">
+							<CardComponent
+								data={value}
+								flag={state.loggedInUser}
+							></CardComponent>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
 }

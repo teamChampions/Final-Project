@@ -11,8 +11,9 @@ export const GlobalStyles = createGlobalStyle<{
 		themeShadow: string;
 		componentColor: string;
 		atomColor: string;
-        boxShadow:string;
-        border:string;
+		boxShadow: string;
+		border: string;
+		buttonColor: string;
 	};
 }>`
     body{
@@ -95,14 +96,23 @@ export const GlobalStyles = createGlobalStyle<{
     .fa-paper-plane{
         color:${({ theme }) => theme.titletagCommentIcons};
     }
+    .ant-popover-arrow{
+        border-top-color: ${({ theme }) => theme.componentColor}  !important;
+        border-right-color: ${({ theme }) => theme.componentColor} !important;
+        border-bottom-color: ${({ theme }) => theme.componentColor} !important;
+        border-left-color: ${({ theme }) => theme.componentColor} !important;
+    }
     .ant-popover-inner-content{
-        background:${({ theme }) => theme.body};
+        background:${({ theme }) => theme.componentColor};
     }
     .profile-maindiv {
         background:${({ theme }) => theme.componentColor};
+        border:${({ theme }) => theme.border} !important;
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }
     .addPost-button  {
-        background-color: ${({ theme }) => theme.atomColor} !important;
+        background-color: ${({ theme }) => theme.buttonColor} !important;
+
     }
     .color{
         color: ${({ theme }) => theme.atomColor} !important;
@@ -111,32 +121,38 @@ export const GlobalStyles = createGlobalStyle<{
         color: ${({ theme }) => theme.atomColor} !important;
     }
     .edit-tag{
-        background-color: ${({ theme }) => theme.atomColor} !important;
+        background-color: ${({ theme }) => theme.buttonColor} !important;
     }
     .site-tag-plus{
-        border:1px dashed  ${({ theme }) => theme.atomColor} !important;
-        color: ${({ theme }) => theme.atomColor} !important;
+        border:1px dashed  ${({ theme }) => theme.buttonColor} !important;
+        color: ${({ theme }) => theme.buttonColor} !important;
     }
     .accordion-button {
         color: ${({ theme }) => theme.titletagCommentIcons} !important;
         background-color:${({ theme }) => theme.componentColor} !important;
+        border:${({ theme }) => theme.border} !important;
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }
 
     .accordion-button:not(.collapsed) {
         background-color:${({ theme }) => theme.componentColor} !important;
+        border:${({ theme }) => theme.border} !important;
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }
     .accordion-body{
         background-color:${({ theme }) => theme.componentColor} !important;
+        border:${({ theme }) => theme.border} !important;
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }
-    span{
-        color: ${({ theme }) => theme.text};
-
-    }
+   
     .post-owner,.image{
         box-shadow:${({ theme }) => theme.boxShadow}
     }
     .ant-card{
        border:${({ theme }) => theme.border} !important;
+    }
+    .no-comments{
+        color:${({ theme }) => theme.text};
     }
 `;
 
@@ -144,24 +160,26 @@ export const lightTheme = {
 	body: "whitesmoke",
 	componentColor: "white",
 	atomColor: "#534ebf",
+	buttonColor: "#534ebf",
 	text: "#121212",
 	menu: "white",
 	actions: "rgba(0, 0, 0, 0.45)",
 	commenthover: "white",
 	titletagCommentIcons: "#534ebf",
-    boxShadow: "0px 0px 4px 0px rgb(200, 200, 200)",
-    border:"none",
+	boxShadow: "0px 0px 4px 0px rgb(200, 200, 200)",
+	border: "none",
 };
 
 export const darkTheme = {
 	body: "#0d1117",
 	text: "#fff",
+	buttonColor: "#0a01ca",
 	atomColor: "white",
 	menu: "#161b22",
 	componentColor: "#161b22",
 	actions: "white",
 	commenthover: "#161b22",
 	titletagCommentIcons: "white",
-    boxShadow:"none",
-    border:"1px solid #30363d"
+	boxShadow: "none",
+	border: "1px solid #30363d",
 };

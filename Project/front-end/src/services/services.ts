@@ -1,5 +1,11 @@
 import axios from "axios";
-import { ALL_POSTS, LOGGED_IN, POST_DETAILS } from "../store/constants";
+import {
+	ALL_POSTS,
+	LOGGED_IN,
+	POST_DETAILS,
+	ADD_COMMENT,
+	DELETE_COMMENT,
+} from "../store/constants";
 const loginUser = async (data: any) => {
 	try {
 		let response = await axios.post(
@@ -10,7 +16,7 @@ const loginUser = async (data: any) => {
 		localStorage.setItem("token", response.data.token);
 		localStorage.setItem("user", response.data.user);
 		localStorage.setItem("userID", response.data.userId);
-		return { type: LOGGED_IN, payload: response.data.user };
+		return { type: LOGGED_IN, payload: localStorage.getItem("user") };
 	} catch (err) {
 		console.log(err.message);
 		return null;
@@ -51,6 +57,21 @@ const getPostsByCategory = async (data: any) => {
 	};
 };
 
+const deleteComment = async (data: any) => {
+	const res = await axios.delete(`http://localhost:5000/api/comments/${data}`, {
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: localStorage.getItem("token"),
+		},
+	});
+	console.log(res.data.comments);
+
+	return {
+		type: DELETE_COMMENT,
+		commentLength: res.data.comments.length,
+	};
+};
+
 const addComment = async (data: any) => {
 	let res = await axios.post(
 		`http://localhost:5000/api/comments`,
@@ -62,25 +83,22 @@ const addComment = async (data: any) => {
 			},
 		}
 	);
+	console.log(res.data.comments);
+
 	return {
-		type: "ADD_COMMENT",
-		payload: res.data,
+		type: ADD_COMMENT,
 		commentLength: res.data.comments.length,
 	};
 };
 
 const addPost = async (data: any) => {
 	try {
-		const res = await axios.post(
-			`http://localhost:5000/api/posts`,
-			data,
-			{
-				headers: {
-					Authorization: localStorage.getItem("token"),
-				},
-			}
-		);
-		return res
+		const res = await axios.post(`http://localhost:5000/api/posts`, data, {
+			headers: {
+				Authorization: localStorage.getItem("token"),
+			},
+		});
+		return res;
 	} catch (err) {
 		return null;
 	}
@@ -103,17 +121,16 @@ const currentUserProfile = async (data: any) => {
 	}
 };
 
-const getPostDetails=async(postid:any)=>{
-	try{
-		const postDetails=await axios.get(`http://localhost:5000/api/posts/comments/postid/${postid}`)
-		console.log(postDetails.data)
-		return {type:POST_DETAILS,payload:postDetails.data}
-	}catch(err){
-		return err
+const getPostDetails = async (postid: any) => {
+	try {
+		const postDetails = await axios.get(
+			`http://localhost:5000/api/posts/comments/postid/${postid}`
+		);
+		return { type: POST_DETAILS, payload: postDetails.data };
+	} catch (err) {
+		return err;
 	}
-
-
-}
+};
 export {
 	loginUser,
 	signupUser,
@@ -122,5 +139,6 @@ export {
 	addPost,
 	addComment,
 	currentUserProfile,
-	getPostDetails
+	getPostDetails,
+	deleteComment,
 };

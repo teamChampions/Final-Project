@@ -90,6 +90,7 @@ var deleteComment = function (req, res) { return __awaiter(void 0, void 0, void 
                 return [4 /*yield*/, posts_schema_1.default.findOneAndUpdate({ _id: postId }, { $pull: { comments: req.params.id } })];
             case 2:
                 post = _a.sent();
+                console.log(post.comments.length);
                 res.status(200).json(post);
                 return [3 /*break*/, 4];
             case 3:

@@ -1,3 +1,8 @@
 /* .posts-div{
     margin-top:8%;
 } */
+
+.main-container {
+	max-width: 550px;
+	margin: auto;
+}

@@ -27,15 +27,13 @@ function Profile() {
 
 							return (
 								<div className="profile-maindiv">
-									<div className="profile-image">
+									<div className="image-div">
 										<img
-											style={{
-												width: "200px",
-												margin: "20% auto",
-												height: "200px",
-												borderRadius: "50%",
-											}}
+											className="profile-image"
 											src="https://newevolutiondesigns.com/images/freebies/flowers-facebook-cover-preview-2.jpg"
+											alt="profile"
+											width="200"
+											height="200"
 										/>
 									</div>
 									<div>

@@ -10,7 +10,7 @@ interface Iprops {
 export default function ToggleButton(props: Iprops) {
 	return (
 		<div
-			style={{ cursor: "pointer", display: "inline-block" }}
+			style={{ cursor: "pointer", display: "inline-block", margin: "auto" }}
 			onClick={props.toggleTheme}
 		>
 			{props.theme === "dark" ? (

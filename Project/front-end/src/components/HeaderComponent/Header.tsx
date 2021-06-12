@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Popover, Tooltip, Button, Avatar } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import { Input } from "semantic-ui-react";
+import { Popover, Avatar } from "antd";
 import { FormControl } from "react-bootstrap";
 import "./header.css";
 import { MDBContainer, MDBNavbar, MDBNavbarBrand } from "mdb-react-ui-kit";
@@ -11,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ToggleBtn from "../../styles/toggleButton";
 import { useDarkTheme } from "../../styles/useDarkTheme";
 
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../../styles/globalStyles";
 
 // npm i antd @types/antd @ant-design/icons mdb-react-ui-kit react-bootstrap
@@ -43,16 +41,21 @@ export default function Header() {
 					Profile
 				</Link>
 			</p>
+			<p>
+				<ToggleBtn theme={theme} toggleTheme={toggleTheme}></ToggleBtn>
+			</p>
 
-			<PoweroffOutlined
-				onClick={logout}
-				title="Logout"
-				style={{
-					fontSize: "15px",
-					color: "red",
-					cursor: "pointer",
-				}}
-			/>
+			<p>
+				<PoweroffOutlined
+					onClick={logout}
+					title="Logout"
+					style={{
+						fontSize: "20px",
+						color: "red",
+						cursor: "pointer",
+					}}
+				/>
+			</p>
 		</div>
 	);
 
@@ -62,13 +65,8 @@ export default function Header() {
 
 	const setCategoryValue = (e: any) => {
 		let value: any = e.target?.value;
-
-		dispatch({ type: "SEARCH_PARAMS", payload: value });
-	};
-
-	const checkKey = (e: any) => {
 		if (e.charCode === 13) {
-			console.log(e);
+			dispatch({ type: "SEARCH_PARAMS", payload: value });
 		}
 	};
 
@@ -82,6 +80,9 @@ export default function Header() {
 			console.log("enter all values");
 		}
 	};
+
+	console.log("state.loggedInUser.length", state.loggedInUser.length);
+
 	return (
 		<ThemeProvider theme={themeMode}>
 			<GlobalStyles></GlobalStyles>
@@ -90,15 +91,14 @@ export default function Header() {
 					<MDBContainer fluid>
 						<div className="container-fluid">
 							<div className="row">
-								<div className="col-sm-3">
+								<div className=" col-sm-3 col-3">
 									<MDBNavbarBrand>
 										<Link className="link-tag" to="/home" title="Home">
 											Skill Media
 										</Link>
 									</MDBNavbarBrand>
 								</div>
-								<div className="col-sm-6">
-									{/*  <MDBCollapse navbar show={showBasic}> */}
+								<div className="col-sm-6 col-8">
 									<div
 										style={{
 											display: "grid",
@@ -110,7 +110,7 @@ export default function Header() {
 											placeholder="Search"
 											className="mr-sm-1 search-input"
 											onChange={setValue}
-											onKeyPress={checkKey}
+											onKeyPress={setCategoryValue}
 										/>
 										{/* <Tooltip title="search">
 											<Button
@@ -120,15 +120,14 @@ export default function Header() {
 											/>
 										</Tooltip> */}
 									</div>
-									{/* </MDBCollapse> */}
 								</div>
-								<div className="col-sm-3">
-									{/*  <MDBCollapse> */}
-									{state.loggedInUser && (
+								<div className="col-sm-3 col-1" style={{ margin: "auto" }}>
+									{state.loggedInUser.length > 0 && (
 										<Popover
 											content={content}
 											title={state.user}
 											trigger="click"
+											style={{ width: "30%" }}
 										>
 											<Avatar
 												src="https://eshendetesia.com/images/user-profile.png"
@@ -136,19 +135,6 @@ export default function Header() {
 											/>
 										</Popover>
 									)}
-									<div
-										style={{
-											display: "inline-block",
-											float: "right",
-											marginRight: "10%",
-										}}
-									>
-										<ToggleBtn
-											theme={theme}
-											toggleTheme={toggleTheme}
-										></ToggleBtn>
-									</div>
-									{/* </MDBCollapse> */}
 								</div>
 							</div>
 						</div>
@@ -157,25 +143,4 @@ export default function Header() {
 			</div>
 		</ThemeProvider>
 	);
-}
-
-{
-	/* <Form.Group as={Col} controlId="formGridState">
-<Form.Control
-  name="category"
-  as="select"
-  defaultValue="Choose..."
-  onChange={setCategoryValue}
-  style={{ width: "100px" }}
->
-  <option value="">Category...</option>
-  <option value="Javascript">Javascript</option>
-  <option value="React">React</option>
-  <option value="Nodejs">Nodejs</option>
-  <option value="Express">Express</option>
-  <option value="HTML">HTML</option>
-  <option value="CSS">CSS</option>
-  <option value="MongoDb">MongoDb</option>
-</Form.Control>
-</Form.Group> */
 }
