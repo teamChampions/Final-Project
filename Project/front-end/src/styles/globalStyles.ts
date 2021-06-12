@@ -70,7 +70,10 @@ export const GlobalStyles = createGlobalStyle<{
         color:${({ theme }) => theme.text};
         transition: all .5s linear;
     }
-
+    .input{
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
+        border:${({ theme }) => theme.border} !important;
+    }
     .comment-section{
         background:${({ theme }) => theme.body};
         color:${({ theme }) => theme.text};
@@ -130,6 +133,10 @@ export const GlobalStyles = createGlobalStyle<{
     .accordion-button {
         color: ${({ theme }) => theme.titletagCommentIcons} !important;
         background-color:${({ theme }) => theme.componentColor} !important;
+        border:${({ theme }) => theme.border} !important;
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
+    }
+    .search-input{
         border:${({ theme }) => theme.border} !important;
         box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }

@@ -36,7 +36,7 @@ const CommentComponent = ({ comment }: Props) => {
 						<p>{comment.comment}</p>
 						<div className="d-flex justify-content-end">
 							<div className="icons">
-								<small className="like-count">{comment.likes.length}</small>
+								<span className="like-count ">{comment.likes.length}</span>
 								<i className="fa fa-thumbs-o-up color" aria-hidden="true"></i>
 							</div>
 							{comment.user.userName === user && (
