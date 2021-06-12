@@ -16,10 +16,10 @@ export default function PostComponent() {
 		let data = await displayAllPosts();
 		dispatch(data);
 	};
-	useEffect(() => {
-		result();
-	}, []);
 
+	useEffect(() => {
+		result()
+	}, [state.postLikeLength])
 	console.log(state.posts);
 
 	return (

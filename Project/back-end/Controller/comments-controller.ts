@@ -30,11 +30,9 @@ const deleteComment = async (req: any, res: any) => {
 			comment.remove();
 			const post: any = await PostsModel.findOneAndUpdate(
 				{ _id: postId },
-				{ $pull: { comments: req.params.id } }
+				{ $pull: { comments: req.params.id } },
+				{new:true}
 			);
-
-			console.log(post.comments.length);
-
 			res.status(200).json(post);
 		} else {
 			res.status(404).send("Not found");

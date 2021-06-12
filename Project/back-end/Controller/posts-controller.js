@@ -85,17 +85,17 @@ var getAllposts = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, posts_schema_1.default.find()
                         .populate({ path: "users", select: "_id userName" })
-                        .populate({
-                        path: "comments",
-                        options: { sort: { createdAt: "desc" } },
-                        populate: {
-                            path: "user",
-                            select: "_id userName",
-                        },
-                    })
                         .sort({ createdAt: "desc" })];
             case 1:
                 posts = _a.sent();
+                /* .populate({
+                    path: "comments",
+                    options: { sort: { createdAt: "desc" } },
+                    populate: {
+                        path: "user",
+                        select: "_id userName",
+                    },
+                }) */
                 res.status(200).send(posts);
                 return [3 /*break*/, 3];
             case 2:

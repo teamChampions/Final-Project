@@ -79,7 +79,7 @@ var postLike = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
             case 6:
                 res.status(201).json({
                     deleted: deleted,
-                    message: "Like",
+                    count: post.likes.length,
                 });
                 return [3 /*break*/, 8];
             case 7:
@@ -126,52 +126,47 @@ var getUserLikedPosts = function (req, res) { return __awaiter(void 0, void 0, v
 }); };
 exports.getUserLikedPosts = getUserLikedPosts;
 var commentLikes = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted, comment, liked, like, err_3;
+    var comment, liked, like, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                deleted = false;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 7, , 8]);
+                _a.trys.push([0, 6, , 7]);
                 return [4 /*yield*/, comment_schema_1.default
                         .findById(req.params.id)
                         .populate("likes")];
-            case 2:
+            case 1:
                 comment = _a.sent();
                 return [4 /*yield*/, likes_schema_1.default.findOne({
                         comment: req.params.id,
                         user: req.user._id,
                     })];
-            case 3:
+            case 2:
                 liked = _a.sent();
-                if (!liked) return [3 /*break*/, 4];
+                if (!liked) return [3 /*break*/, 3];
                 comment.likes.pull(liked._id);
                 comment.save();
                 liked.remove();
-                deleted = true;
-                return [3 /*break*/, 6];
-            case 4: return [4 /*yield*/, likes_schema_1.default.create({
+                return [3 /*break*/, 5];
+            case 3: return [4 /*yield*/, likes_schema_1.default.create({
                     comment: req.params.id,
                     user: req.user._id,
                 })];
-            case 5:
+            case 4:
                 like = _a.sent();
                 comment.likes.push(like._id);
                 comment.save();
-                _a.label = 6;
-            case 6:
+                _a.label = 5;
+            case 5:
                 res.status(201).json({
-                    deletedCommemt: deleted,
+                    count: comment.likes.length,
                     like: liked,
-                    message: "Like",
                 });
-                return [3 /*break*/, 8];
-            case 7:
+                return [3 /*break*/, 7];
+            case 6:
                 err_3 = _a.sent();
                 res.status(404).send("Unauthorised to like");
-                return [3 /*break*/, 8];
-            case 8: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };

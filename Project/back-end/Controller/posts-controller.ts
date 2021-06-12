@@ -33,16 +33,16 @@ const getAllposts = async (req: any, res: any) => {
 	try {
 		const posts = await PostsModel.find()
 			.populate({ path: "users", select: "_id userName" })
-			.populate({
+			.sort({ createdAt: "desc" });
+			/* .populate({
 				path: "comments",
 				options: { sort: { createdAt: "desc" } },
 				populate: {
 					path: "user",
 					select: "_id userName",
 				},
-			})
-			.sort({ createdAt: "desc" });
-
+			}) */
+	
 		res.status(200).send(posts);
 	} catch (err: any) {
 		res.status(404).json({

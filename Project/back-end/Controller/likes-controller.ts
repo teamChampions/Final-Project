@@ -3,7 +3,7 @@ import PostsModel from "../Model/posts-schema";
 import comments from "../Model/comment-schema";
 
 const postLike = async (req: any, res: any) => {
-	let deleted = false;
+	let deleted=false;
 	try {
 		const post: any = await PostsModel.findById(req.params.id).populate(
 			"likes"
@@ -17,7 +17,7 @@ const postLike = async (req: any, res: any) => {
 			post.likes.pull(liked._id);
 			post.save();
 			liked.remove();
-			deleted = true;
+			deleted=true;
 		} else {
 			const like: any = await Likes.create({
 				post: req.params.id,
@@ -27,8 +27,8 @@ const postLike = async (req: any, res: any) => {
 			post.save();
 		}
 		res.status(201).json({
-			deleted: deleted,
-			message: "Like",
+			deleted:deleted,
+			count:post.likes.length,
 		});
 	} catch (err) {
 		res.status(404).send("Unauthorised to like");
@@ -60,8 +60,7 @@ const getUserLikedPosts = async (req: any, res: any) => {
 };
 
 const commentLikes = async (req: any, res: any) => {
-	
-	let deleted = false;
+
 	try {
 		const comment: any = await comments
 			.findById(req.params.id)
@@ -75,7 +74,6 @@ const commentLikes = async (req: any, res: any) => {
 			comment.likes.pull(liked._id);
 			comment.save();
 			liked.remove();
-			deleted = true;
 		} else {
 			const like: any = await Likes.create({
 				comment: req.params.id,
@@ -85,9 +83,8 @@ const commentLikes = async (req: any, res: any) => {
 			comment.save();
 		}
 		res.status(201).json({
-			deletedCommemt: deleted,
+			count:comment.likes.length,
 			like: liked,
-			message: "Like",
 		});
 	} catch (err) {
 		res.status(404).send("Unauthorised to like");

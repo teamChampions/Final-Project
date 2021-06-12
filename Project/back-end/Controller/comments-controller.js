@@ -87,10 +87,9 @@ var deleteComment = function (req, res) { return __awaiter(void 0, void 0, void 
                 if (!(comment.user == req.user.id)) return [3 /*break*/, 3];
                 postId = comment.post;
                 comment.remove();
-                return [4 /*yield*/, posts_schema_1.default.findOneAndUpdate({ _id: postId }, { $pull: { comments: req.params.id } })];
+                return [4 /*yield*/, posts_schema_1.default.findOneAndUpdate({ _id: postId }, { $pull: { comments: req.params.id } }, { new: true })];
             case 2:
                 post = _a.sent();
-                console.log(post.comments.length);
                 res.status(200).json(post);
                 return [3 /*break*/, 4];
             case 3:

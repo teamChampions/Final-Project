@@ -12,6 +12,13 @@
 	transform: scale(1.03);
 }
 
-.size {
+.icon-style {
 	font-size: 28px !important;
+	color:#534edf;
+}
+
+.post-info{
+	margin-left: 5px;
+	font-size: 20px;
+	color:#534edf;
 }

@@ -26,7 +26,7 @@ export default function AddCommentComponent({}: Props) {
 	const { searchedPost, commentLength } = useSelector(
 		(state: any) => state.posts
 	);
-
+		
 	const commentInput = (e: any) => {
 		setcomment({ comment: e.target.value, post: postid });
 	};
@@ -75,6 +75,7 @@ export default function AddCommentComponent({}: Props) {
 										<div className="likes">
 											<i
 												className="fa fa-thumbs-up color"
+												aria-disabled="true"
 												aria-hidden="true"
 											></i>
 											<span className="likes-comments-count color">
