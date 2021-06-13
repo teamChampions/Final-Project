@@ -5,7 +5,7 @@ import {
 	POST_DETAILS,
 	ADD_COMMENT,
 	DELETE_COMMENT,
-	LIKE_POST
+	LIKE_POST,
 } from "../store/constants";
 const loginUser = async (data: any) => {
 	try {
@@ -24,22 +24,24 @@ const loginUser = async (data: any) => {
 	}
 };
 
-const likeApi=async(postID:any)=>{
-	try{
-		const result=await axios.post(`http://localhost:5000/api/likes/toggle/${postID}`,{},{
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: localStorage.getItem("token"),
-			},
-		})
+const likeApi = async (postID: any) => {
+	try {
+		const result = await axios.post(
+			`http://localhost:5000/api/likes/toggle/${postID}`,
+			{},
+			{
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: localStorage.getItem("token"),
+				},
+			}
+		);
 		return {
 			type: LIKE_POST,
 			payload: result.data.count,
 		};
-	}catch(err){
-
-	}
-}
+	} catch (err) {}
+};
 const signupUser = async (data: any) => {
 	try {
 		let response = await axios.post(
@@ -57,7 +59,6 @@ const displayAllPosts = async () => {
 	const res = await axios.get(`http://localhost:5000/api/posts`, {
 		headers: { "Content-Type": "multipart/form-data" },
 	});
-	console.log(res.data);
 	return {
 		type: ALL_POSTS,
 		payload: res.data,
@@ -81,7 +82,6 @@ const deleteComment = async (data: any) => {
 			Authorization: localStorage.getItem("token"),
 		},
 	});
-	console.log(res.data.comments);
 	return {
 		type: DELETE_COMMENT,
 		commentLength: res.data.comments.length,
@@ -99,7 +99,6 @@ const addComment = async (data: any) => {
 			},
 		}
 	);
-	console.log(res.data.comments);
 
 	return {
 		type: ADD_COMMENT,

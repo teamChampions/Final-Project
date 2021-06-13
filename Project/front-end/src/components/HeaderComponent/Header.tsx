@@ -74,14 +74,11 @@ export default function Header() {
 		let name: any = e.target?.name;
 		let value: any = e.target?.value;
 		if (value.length > 0) {
-			console.log(name, value, searchText);
 			setsearchText((prevState: any) => ({ ...prevState, [name]: value }));
 		} else {
 			console.log("enter all values");
 		}
 	};
-
-	console.log("state.loggedInUser.length", state.loggedInUser.length);
 
 	return (
 		<ThemeProvider theme={themeMode}>

@@ -18,13 +18,11 @@ interface Props {}
 
 export const AddPostComponent = (props: Props) => {
 	const [description, setDescription] = useState("");
-	const [file, setFile] = useState("");
 
 	const formData = new FormData();
 
 	const handleChange = (e: any) => {
 		setDescription(e.target.value);
-		console.log(description);
 	};
 
 	const state = useSelector((state: any) => state.posts);
@@ -45,7 +43,6 @@ export const AddPostComponent = (props: Props) => {
 	const [filePick, setfilePick] = useState<any>({});
 	const [Status, setStatus] = useState<any>({});
 	const fileByAntd = (e: any) => {
-		console.log(e.target.files[0]);
 		setfilePick(e.target.files[0]);
 	};
 

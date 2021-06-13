@@ -33,16 +33,15 @@ const getAllposts = async (req: any, res: any) => {
 	try {
 		const posts = await PostsModel.find()
 			.populate({ path: "users", select: "_id userName" })
-			.sort({ createdAt: "desc" });
-			/* .populate({
-				path: "comments",
-				options: { sort: { createdAt: "desc" } },
+			.sort({ createdAt: "desc" })
+			.populate({
+				path: "likes",
 				populate: {
 					path: "user",
 					select: "_id userName",
 				},
-			}) */
-	
+			});
+
 		res.status(200).send(posts);
 	} catch (err: any) {
 		res.status(404).json({
@@ -77,8 +76,8 @@ const getAllpostsByCategory = async (req: any, res: any) => {
 const addPost = async (req: any, res: any) => {
 	try {
 		console.log("User post", req.body);
-		console.log("tell me",req.file.filename)
-		
+		console.log("tell me", req.file.filename);
+
 		const data = await PostsModel.create({
 			...req.body,
 			image: POSTS_PATH + "/" + req.file.filename || "",
@@ -174,5 +173,4 @@ export {
 	uploadPost,
 	deletePost,
 	getCommentsForPost,
-
 };
