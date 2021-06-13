@@ -3,60 +3,86 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUserProfile } from "../../services/services";
 import "./profile.css";
-
+import WcIcon from '@material-ui/icons/Wc';
+import EmailIcon from '@material-ui/icons/Email';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 function Profile() {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	const state = useSelector((state: any) => state.user);
+  const state = useSelector((state: any) => state.user);
 
-	useEffect(() => {
-		currentUserProfile(localStorage.getItem("userId")).then((res) => {
-			dispatch(res);
-		});
-	}, []);
+  useEffect(() => {
+    currentUserProfile(localStorage.getItem("userID")).then((res) => {
+      dispatch(res);
+    });
+  }, []);
 
-	console.log("state.userProfile", state.userProfile);
+  console.log("state.userProfile", state.userProfile);
 
-	return (
-		<div>
-			<Container>
-				<Row>
-					<Col md={{ span: 8, offset: 2 }}>
-						{state.userProfile.map((value: any, index: any) => {
-							console.log("value.users", value.users);
-
-							return (
-								<div className="profile-maindiv">
-									<div className="image-div">
-										<img
-											className="profile-image"
-											src="https://newevolutiondesigns.com/images/freebies/flowers-facebook-cover-preview-2.jpg"
-											alt="profile"
-											width="200"
-											height="200"
-										/>
-									</div>
-									<div>
-										<strong style={{ fontSize: "150%" }}>
-											{value.users.userName}XXXXXXXXXXXXX
-										</strong>
-										<div style={{ maxWidth: "300px", margin: "7% 0 0 0" }}>
-											<p>About</p>
-											<p>
-												hiii, I am a full stack MERN developer, you can follow
-												me see more about full stack especially about react
-											</p>
-										</div>
-									</div>
-									<div></div>
-								</div>
-							);
-						})}
-					</Col>
-				</Row>
-			</Container>
-		</div>
-	);
+  return (
+    <div>
+      <div className="container profile-card">
+        <div className="row">
+          <div className="col-sm-5">
+            <div className="image-div">
+              <img
+                className="profile-image"
+                src="https://newevolutiondesigns.com/images/freebies/flowers-facebook-cover-preview-2.jpg"
+                alt="profile"
+                width="200"
+                height="200"
+              />
+            </div>
+          </div>
+          <div className="col-sm-7 profile-details-div">
+            <div className="d-flex flex-column">
+              <div className="user-details-div">
+								{/* <AccountCircleIcon style={{color:"gray",fontSize:"27px"}}></AccountCircleIcon> */}
+                <span className="user-name">{state.userProfile.userName}</span>
+              </div>
+              <div className="d-flex justify-content user-details-div">
+                <div style={{marginRight:"30px"}}>
+									<EmailIcon style={{color:"gray"}}></EmailIcon>
+                  <span className="user-details">{state.userProfile.email}</span>
+                </div>
+                <div>
+									<WcIcon style={{color:"gray"}}></WcIcon>
+                  <span className="user-details">{state.userProfile.gender}</span>
+                </div>
+              </div>
+              <div className="user-details-div">
+								<p className="user-details">
+								{state.userProfile.about}
+								</p>
+							</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/*  <Container>
+        <Row>
+          <Col md={{ span: 8, offset: 2 }}>
+            <div className="profile-maindiv">
+              <div>
+                <strong style={{ fontSize: "150%" }}>
+                  {state.userProfile.userName}
+                </strong>
+                <div style={{ maxWidth: "300px", margin: "7% 0 0 0" }}>
+                  <p>About</p>
+                  <p>
+                    hiii, I am a full stack MERN developer, you can follow me
+                    see more about full stack especially about react
+                  </p>
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </Col>
+        </Row>
+      </Container> */}
+    </div>
+  );
 }
 
 export default Profile;

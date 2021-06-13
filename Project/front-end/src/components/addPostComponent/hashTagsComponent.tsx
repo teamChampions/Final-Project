@@ -5,13 +5,15 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
-	clear:any
+	clear:any,
+	changeClear?:any
 }
 
-export default function HashTagsComponent({clear}: Props): ReactElement {
+export default function HashTagsComponent({clear,changeClear}: Props): ReactElement {
 	let inputRef = useRef<HTMLInputElement>(null);
 	let editInputRef = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
+	/* console.log("clear in hash tag component",clear) */
 	const postsState = useSelector((state:any) => state.posts)
 	const [tagState, setTagState] = useState<any>({
 		tags: [],
@@ -20,6 +22,11 @@ export default function HashTagsComponent({clear}: Props): ReactElement {
 		editInputIndex: -1,
 		editInputValue: "",
 	});
+	
+/* 	if(clear===true){
+		setTagState({...tagState,tags:[]})
+		changeClear()
+	} */
 	const handleClose = (removedTag: any) => {
 		const tags = tagState.tags.filter((tag: any) => tag !== removedTag);
 		console.log(tags);

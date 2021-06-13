@@ -11,5 +11,6 @@ userRouter
     .get("/", users_controller_1.getAllusers)
     .post("/", users_controller_1.signup)
     .post("/login", users_controller_1.login)
-    .post("/profile", users_controller_1.isAuthorised, users_controller_1.getCurrentUserProfile);
+    .get("/profile/:userID", users_controller_1.getCurrentUserProfile)
+    .get("/posts/:userID", users_controller_1.getCurrentUserProfilePosts);
 exports.default = userRouter;

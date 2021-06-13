@@ -6,6 +6,7 @@ import "./login.css";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../services/services";
 import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer, Zoom } from "react-toastify";
 
 export default function Login() {
 	let [data, setData] = useState({
@@ -35,12 +36,30 @@ export default function Login() {
 		e.preventDefault();
 		let result: any = await loginUser(data);
 		if (result) {
-			console.log(result);
-			console.log("Login sccessful");
 			dispatch(result);
-			history.push("/home");
+			toast.success('Login successful', {
+				position: "top-center",
+				autoClose: 1500,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				transition:Zoom,
+				});
+				setTimeout(()=>history.push("/home"),1500)
+			
 		} else {
-			console.log("Login unsccessful");
+			toast.error('Invalid username or password', {
+				position: "top-center",
+				autoClose: 2000,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				transition:Zoom,
+				});
 		}
 	};
 	console.log("login page");
@@ -50,6 +69,7 @@ export default function Login() {
 			<div className="secure-login-svg">
 				<img src={mylogin}></img>
 			</div>
+			<ToastContainer></ToastContainer>
 			<form onSubmit={login} className="login-form">
 				<Container className="container">
 					<h2

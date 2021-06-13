@@ -8,6 +8,8 @@ import {
 	DELETE_COMMENT,
 	LIKE_POST,
 	LIKE_COMMENT,
+	USER_PROFILE,
+	USER_POSTS
 } from "../store/constants";
 const loginUser = async (data: any) => {
 	try {
@@ -117,7 +119,6 @@ const addPost = async (data: any) => {
 				Authorization: localStorage.getItem("token"),
 			},
 		});
-
 		return {type:ADD_POST};
 	} catch (err) {
 		console.log(err)
@@ -127,21 +128,23 @@ const addPost = async (data: any) => {
 
 const currentUserProfile = async (data: any) => {
 	try {
-		const res = await axios.post(
-			`http://localhost:5000/api/users/profile`,
-			JSON.stringify(data),
-			{
-				headers: {
-					Authorization: localStorage.getItem("token"),
-				},
-			}
-		);
-		return { type: "USER_PROFILE", payload: res.data };
+		const res = await axios.get(
+			`http://localhost:5000/api/users/profile/${data}`);
+		return { type: USER_PROFILE, payload: res.data };
 	} catch (err) {
 		return null;
 	}
 };
 
+const currentUserPosts = async (data: any) => {
+	try {
+		const res = await axios.get(
+			`http://localhost:5000/api/users/posts/${data}`);
+		return { type: USER_POSTS, payload: res.data };
+	} catch (err) {
+		return null;
+	}
+};
 const getPostDetails = async (postid: any) => {
 	try {
 		const postDetails = await axios.get(
@@ -177,5 +180,6 @@ export {
 	getPostDetails,
 	deleteComment,
 	likeApi,
-	likeCommentApi
+	likeCommentApi,
+	currentUserPosts
 };

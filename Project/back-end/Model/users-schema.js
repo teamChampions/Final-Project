@@ -14,6 +14,9 @@ var UsersSchema = new mongoose_1.default.Schema({
         type: String,
         unique: true,
     },
+    about: {
+        type: String
+    },
     gender: {
         type: String,
     },

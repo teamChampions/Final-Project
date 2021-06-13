@@ -10,11 +10,13 @@ import {
 	LIKE_POST,
 	LIKE_COMMENT,
 	ADD_POST,
+	USER_POSTS,
 } from "../store/constants";
 
 const initialStateOfUser = {
 	loggedInUser: "",
-	userProfile: [],
+	userProfile: {},
+	userPosts:[]
 };
 const userReducer = (currentState = initialStateOfUser, action: any): any => {
 	switch (action.type) {
@@ -33,6 +35,11 @@ const userReducer = (currentState = initialStateOfUser, action: any): any => {
 				...currentState,
 				userProfile: action.payload,
 			};
+			case USER_POSTS:
+				return {
+					...currentState,
+					userPosts: action.payload,
+				};
 		default:
 			return currentState;
 	}

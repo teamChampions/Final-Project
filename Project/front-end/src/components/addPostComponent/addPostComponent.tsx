@@ -19,6 +19,9 @@ export const AddPostComponent = (props: Props) => {
 		setDescription(e.target.value);
 	};
 
+	/* const changeClearFunction=()=>{
+		setClear(false)
+	} */
 	const state = useSelector((state: any) => state.posts);
 
 	const dispatch = useDispatch();
@@ -92,7 +95,7 @@ export const AddPostComponent = (props: Props) => {
 		formData.delete('image')
 		setDescription("")
 		setfilePick({})
-		setClear(true)
+		//setClear(true)
 	};
 
 	return (
@@ -130,7 +133,7 @@ export const AddPostComponent = (props: Props) => {
 										/>
 									</div>
 									<div className="addPost-tags">
-										<HashTagsComponent clear={Clear}></HashTagsComponent>
+										<HashTagsComponent /* changeClear={changeClearFunction} */ clear={Clear}></HashTagsComponent>
 									</div>
 									<div className="upload-post-container">
 										{/* <Upload

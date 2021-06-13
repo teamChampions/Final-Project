@@ -10,6 +10,9 @@ const UsersSchema = new mongoose.Schema({
 		type: String,
 		unique: true,
 	},
+	about:{
+		type: String
+	},
 	gender: {
 		type: String,
 	},
