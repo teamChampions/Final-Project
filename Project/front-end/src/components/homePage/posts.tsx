@@ -23,7 +23,7 @@ export default function PostComponent() {
 
 	useEffect(() => {
 		result();
-	}, [state.postLikeLength]);
+	}, [state.postLikeLength,state.postLength]);
 
 	window.onscroll = function () {
 		if (document.documentElement.scrollTop > 100) {

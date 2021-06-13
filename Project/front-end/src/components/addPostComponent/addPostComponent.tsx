@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
 	Button,
-	Container,
-	Icon,
-	makeStyles,
-	TextField,
 } from "@material-ui/core";
-import { Upload, Button as UpButton } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
 import HashTagsComponent from "./hashTagsComponent";
 import "./addPost.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "../../services/services";
-import AlertComponent from "../alertComponent";
+import { toast, ToastContainer, Zoom } from "react-toastify";
 interface Props {}
 
 export const AddPostComponent = (props: Props) => {
@@ -39,9 +33,9 @@ export const AddPostComponent = (props: Props) => {
 	// 	},
 	// }));
 	// const classes = useStyles();
-
+	const [Clear, setClear] = useState(false)
 	const [filePick, setfilePick] = useState<any>({});
-	const [Status, setStatus] = useState<any>({});
+	
 	const fileByAntd = (e: any) => {
 		setfilePick(e.target.files[0]);
 	};
@@ -54,22 +48,56 @@ export const AddPostComponent = (props: Props) => {
 		});
 		formData.append("image", filePick);
 		try {
-			const res = await addPost(formData);
-			setStatus({
-				message: "Posted successfully",
-				type: "success",
-				flag: true,
-			});
+			if(description){
+				const res = await addPost(formData);
+				dispatch(res)
+				toast.info('Post added successfully', {
+					position: "top-center",
+					autoClose: 2000,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					transition:Zoom,
+					});
+					
+			}
+			else{
+				toast.warning('Description is required', {
+					position: "top-center",
+					autoClose: 2000,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					transition:Zoom,
+					});
+			}
 		} catch (err) {
-			setStatus({ message: err.message, type: "error", flag: true });
+			toast.error('Something went wrong', {
+				position: "top-center",
+				autoClose: 2000,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				transition:Zoom,
+				});
 		}
+		formData.delete('description')
+		formData.delete('tags[]')
+		formData.delete('image')
+		setDescription("")
+		setfilePick({})
+		setClear(true)
 	};
 
 	return (
 		<div className="fix-add-post">
-			{Status.flag && (
-				<AlertComponent message={Status.message} type={Status.type} />
-			)}
+			<ToastContainer />
 			<div className="accordion my-accordian" id="accordionExample">
 				<div className="accordion-item">
 					<button
@@ -98,10 +126,11 @@ export const AddPostComponent = (props: Props) => {
 											onChange={handleChange}
 											placeholder="Enter Description/Question"
 											value={description}
+											required
 										/>
 									</div>
 									<div className="addPost-tags">
-										<HashTagsComponent></HashTagsComponent>
+										<HashTagsComponent clear={Clear}></HashTagsComponent>
 									</div>
 									<div className="upload-post-container">
 										{/* <Upload

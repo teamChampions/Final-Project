@@ -143,22 +143,25 @@ var getAllpostsByCategory = function (req, res) { return __awaiter(void 0, void 
 }); };
 exports.getAllpostsByCategory = getAllpostsByCategory;
 var addPost = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, err_3;
+    var filename, data, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 console.log("User post", req.body);
-                console.log("tell me", req.file.filename);
-                return [4 /*yield*/, posts_schema_1.default.create(__assign(__assign({}, req.body), { image: POSTS_PATH + "/" + req.file.filename || "", users: req.user._id }))];
+                console.log("req.file", req.file);
+                filename = "";
+                if (req.file != undefined) {
+                    filename = POSTS_PATH + "/" + req.file.filename;
+                }
+                return [4 /*yield*/, posts_schema_1.default.create(__assign(__assign({}, req.body), { image: filename, users: req.user._id }))];
             case 1:
                 data = _a.sent();
-                console.log(req.file);
                 res.status(200).send(data);
                 return [3 /*break*/, 3];
             case 2:
                 err_3 = _a.sent();
-                res.status(401).json({
+                res.status(400).json({
                     status: false,
                     message: "Could not add the post",
                 });
@@ -267,6 +270,12 @@ var getCommentsForPost = function (req, res) { return __awaiter(void 0, void 0, 
                         populate: {
                             path: "user",
                             select: "_id userName",
+                        },
+                    })
+                        .populate({
+                        path: "comments",
+                        populate: {
+                            path: "likes"
                         },
                     })];
             case 1:

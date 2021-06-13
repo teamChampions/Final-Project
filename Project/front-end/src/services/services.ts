@@ -1,11 +1,13 @@
 import axios from "axios";
 import {
 	ALL_POSTS,
+	ADD_POST,
 	LOGGED_IN,
 	POST_DETAILS,
 	ADD_COMMENT,
 	DELETE_COMMENT,
 	LIKE_POST,
+	LIKE_COMMENT,
 } from "../store/constants";
 const loginUser = async (data: any) => {
 	try {
@@ -108,14 +110,18 @@ const addComment = async (data: any) => {
 
 const addPost = async (data: any) => {
 	try {
+		console.log(`localStorage.getItem("token")`,localStorage.getItem("token") )
 		const res = await axios.post(`http://localhost:5000/api/posts`, data, {
 			headers: {
+				"Content-Type": "application/json",
 				Authorization: localStorage.getItem("token"),
 			},
 		});
-		return res;
+
+		return {type:ADD_POST};
 	} catch (err) {
-		return null;
+		console.log(err)
+		return err;
 	}
 };
 
@@ -145,6 +151,20 @@ const getPostDetails = async (postid: any) => {
 	} catch (err) {
 		return err;
 	}
+
+};
+
+const likeCommentApi=async (data: any) => {
+	const res = await axios.post(`http://localhost:5000/api/likes/comments/${data}`,{}, {
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: localStorage.getItem("token"),
+		},
+	});
+	return {
+		type: LIKE_COMMENT,
+		payload: res.data.count,
+	};
 };
 export {
 	loginUser,
@@ -157,4 +177,5 @@ export {
 	getPostDetails,
 	deleteComment,
 	likeApi,
+	likeCommentApi
 };

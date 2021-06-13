@@ -76,18 +76,20 @@ const getAllpostsByCategory = async (req: any, res: any) => {
 const addPost = async (req: any, res: any) => {
 	try {
 		console.log("User post", req.body);
-		console.log("tell me", req.file.filename);
-
+		console.log(`req.file`, req.file)
+		let filename="";
+		if(req.file!=undefined){
+			filename=POSTS_PATH + "/" +req.file.filename
+		}
 		const data = await PostsModel.create({
 			...req.body,
-			image: POSTS_PATH + "/" + req.file.filename || "",
+			image: filename ,
 			users: req.user._id,
 		});
-		console.log(req.file);
 
 		res.status(200).send(data);
 	} catch (err: any) {
-		res.status(401).json({
+		res.status(400).json({
 			status: false,
 			message: "Could not add the post",
 		});
@@ -157,7 +159,13 @@ const getCommentsForPost = async (req: any, res: any) => {
 					path: "user",
 					select: "_id userName",
 				},
-			});
+			})
+			.populate({
+				path: "comments",
+				populate: {
+					path: "likes"
+				},
+			})
 		res.status(200).send(postComments);
 	} catch (err) {
 		res.status(404).send("Not found any comments");

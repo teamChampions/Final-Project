@@ -8,6 +8,8 @@ import {
 	ADD_COMMENT,
 	DELETE_COMMENT,
 	LIKE_POST,
+	LIKE_COMMENT,
+	ADD_POST,
 } from "../store/constants";
 
 const initialStateOfUser = {
@@ -43,6 +45,8 @@ const initialStateOfPost = {
 	searchParams: {},
 	tags: [],
 	postLikeLength: 0,
+	commentLikeLength:0,
+	postLength:0
 };
 
 const postsReducer = (currentState = initialStateOfPost, action: any): any => {
@@ -51,8 +55,17 @@ const postsReducer = (currentState = initialStateOfPost, action: any): any => {
 			return {
 				...currentState,
 				posts: action.payload,
+				tags:[],
+				postLength:action.payload.length
 			};
-
+			case ADD_POST:
+				let val=currentState.postLength+1
+				return {
+					...currentState,
+					tags:[],
+					postLength:val
+				}
+					
 		case POST_TAGS:
 			return {
 				...currentState,
@@ -74,6 +87,9 @@ const postsReducer = (currentState = initialStateOfPost, action: any): any => {
 
 		case LIKE_POST:
 			return { ...currentState, postLikeLength: action.payload };
+
+			case LIKE_COMMENT:
+			return { ...currentState, commentLikeLength: action.payload };
 		default:
 			return currentState;
 	}

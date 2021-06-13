@@ -1,16 +1,18 @@
 import { Tag, Input, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./hashTagComponent.css";
-import React, { ReactElement, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-interface Props {}
+interface Props {
+	clear:any
+}
 
-export default function HashTagsComponent({}: Props): ReactElement {
+export default function HashTagsComponent({clear}: Props): ReactElement {
 	let inputRef = useRef<HTMLInputElement>(null);
 	let editInputRef = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
-
+	const postsState = useSelector((state:any) => state.posts)
 	const [tagState, setTagState] = useState<any>({
 		tags: [],
 		inputVisible: false,
@@ -18,7 +20,6 @@ export default function HashTagsComponent({}: Props): ReactElement {
 		editInputIndex: -1,
 		editInputValue: "",
 	});
-
 	const handleClose = (removedTag: any) => {
 		const tags = tagState.tags.filter((tag: any) => tag !== removedTag);
 		console.log(tags);

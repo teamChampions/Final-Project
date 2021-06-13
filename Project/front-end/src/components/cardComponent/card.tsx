@@ -55,11 +55,10 @@ export default function CardComponent({ data, flag }: Props) {
 					)}
 					<span className="post-info">{data.likes.length}</span>
 				</span>,
-				<span>
+				<span onClick={handleAddComment}>
 					<i
 						className="fa fa-comments-o icon-style"
 						title="Add comment"
-						onClick={handleAddComment}
 						aria-hidden="true"
 					></i>
 					<span className="post-info">{data.comments.length}</span>
