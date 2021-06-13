@@ -67,7 +67,7 @@ export default function PostComponent() {
 			{backToTop ? (
 				<div className="backToTop" onClick={scrollTop}>
 					<ArrowUpwardIcon
-						style={{ color: "gold", fontSize: 40 }}
+						style={{ color: "#534edf", fontSize: 40 }}
 					></ArrowUpwardIcon>
 				</div>
 			) : null}

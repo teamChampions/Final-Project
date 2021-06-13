@@ -128,9 +128,10 @@ const getPostsByUser = async (req: any, res: any) => {
 };
 
 const deletePost = async (req: any, res: any) => {
+	console.log("3. in delete post")
 	try {
 		const post: any = await PostsModel.findOne({ _id: req.params.id });
-
+		
 		if (req.user.id == post.users) {
 			post.remove();
 			const deletedComment = await comments.deleteMany({ post: req.params.id });

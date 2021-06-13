@@ -12,5 +12,6 @@ userRouter
     .post("/", users_controller_1.signup)
     .post("/login", users_controller_1.login)
     .get("/profile/:userID", users_controller_1.getCurrentUserProfile)
-    .get("/posts/:userID", users_controller_1.getCurrentUserProfilePosts);
+    .get("/posts/:userID", users_controller_1.getCurrentUserProfilePosts)
+    .get("/byname/:userName", users_controller_1.getUsersByName);
 exports.default = userRouter;

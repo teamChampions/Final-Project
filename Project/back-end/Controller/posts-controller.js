@@ -227,31 +227,34 @@ var deletePost = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, posts_schema_1.default.findOne({ _id: req.params.id })];
+                console.log("3. in delete post");
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 6, , 7]);
+                return [4 /*yield*/, posts_schema_1.default.findOne({ _id: req.params.id })];
+            case 2:
                 post = _a.sent();
-                if (!(req.user.id == post.users)) return [3 /*break*/, 3];
+                if (!(req.user.id == post.users)) return [3 /*break*/, 4];
                 post.remove();
                 return [4 /*yield*/, comment_schema_1.default.deleteMany({ post: req.params.id })];
-            case 2:
+            case 3:
                 deletedComment = _a.sent();
                 res.status(200).send(deletedComment);
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 5];
+            case 4:
                 res.status(401).json({
                     status: false,
                     message: "You are unauthorized to delete the post",
                 });
-                _a.label = 4;
-            case 4: return [3 /*break*/, 6];
-            case 5:
+                _a.label = 5;
+            case 5: return [3 /*break*/, 7];
+            case 6:
                 err_5 = _a.sent();
                 res.status(404).json({
                     message: "Not Found!",
                 });
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };

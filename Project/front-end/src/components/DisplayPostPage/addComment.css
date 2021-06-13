@@ -3,6 +3,18 @@
   padding: 3%;
 }
 
+.tags-div{
+  font-size:xx-large !important;
+  padding-top:0px;
+  margin: auto;
+  margin-left:45px !important;
+}
+.tags{
+  padding:5px !important;
+  width:max-content !important;
+  border-radius: 5px !important;
+  font-size:20px !important;
+}
 .post-image-section {
   padding: 2%;
   margin: 2%;

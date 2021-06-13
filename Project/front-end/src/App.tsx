@@ -6,7 +6,7 @@ import PostComponent from "./components/homePage/posts";
 import Login from "./components/loginPage/login";
 import Profile from "./components/profileComponent/Profile";
 import Signup from "./components/signupPage/signupForm";
-
+import Search from "./components/searchResult/Search"
 function App() {
   return (
     <div className="body">
@@ -30,10 +30,14 @@ function App() {
            <Header></Header>
             <Profile></Profile>
           </Route>
-         {/* <Route exact path="/signup">
-            <Signup></Signup> 
-          </Route>*/}
-          
+          <Route exact path="/profile/:userName">
+           <Header></Header>
+            <Profile></Profile>
+          </Route>
+          <Route exact path="/search">
+          <Header></Header>
+            <Search></Search>
+          </Route>
         </Switch>
       </Router>
     </div>
