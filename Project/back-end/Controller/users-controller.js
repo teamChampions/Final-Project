@@ -230,6 +230,13 @@ var getCurrentUserProfilePosts = function (req, res) { return __awaiter(void 0, 
                         path: "users",
                         select: "_id userName",
                     })
+                        .populate({
+                        path: "likes",
+                        populate: {
+                            path: "user",
+                            select: "_id userName",
+                        },
+                    })
                         .sort({ createdAt: "desc" })];
             case 1:
                 userProfileDeatils = _a.sent();

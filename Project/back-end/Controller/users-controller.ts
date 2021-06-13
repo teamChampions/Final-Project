@@ -112,6 +112,13 @@ const getCurrentUserProfilePosts = async (req: any, res: any) => {
 				path: "users",
 				select: "_id userName",
 			})
+			.populate({
+				path: "likes",
+				populate: {
+					path: "user",
+					select: "_id userName",
+				},
+			})
 			.sort({ createdAt: "desc" });
 		res.status(200).send(userProfileDeatils);
 	} catch (err) {
@@ -119,13 +126,23 @@ const getCurrentUserProfilePosts = async (req: any, res: any) => {
 	}
 };
 
-const getCurrentUserProfile=async(req:any,res:any)=>{
-	try{
-		const userProfileDeatils = await userModel.findById(req.params.userID,"_id userName email profileImage gender about")
-		res.status(200).send(userProfileDeatils)
-	}catch(err){
+const getCurrentUserProfile = async (req: any, res: any) => {
+	try {
+		const userProfileDeatils = await userModel.findById(
+			req.params.userID,
+			"_id userName email profileImage gender about"
+		);
+		res.status(200).send(userProfileDeatils);
+	} catch (err) {
 		res.status(404).send("User Not Found");
 	}
-}
+};
 
-export { getAllusers, signup, login, isAuthorised, getCurrentUserProfile,getCurrentUserProfilePosts };
+export {
+	getAllusers,
+	signup,
+	login,
+	isAuthorised,
+	getCurrentUserProfile,
+	getCurrentUserProfilePosts,
+};

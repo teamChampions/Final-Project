@@ -16,7 +16,7 @@ import {
 const initialStateOfUser = {
 	loggedInUser: "",
 	userProfile: {},
-	userPosts:[]
+	userPosts: [],
 };
 const userReducer = (currentState = initialStateOfUser, action: any): any => {
 	switch (action.type) {
@@ -35,11 +35,11 @@ const userReducer = (currentState = initialStateOfUser, action: any): any => {
 				...currentState,
 				userProfile: action.payload,
 			};
-			case USER_POSTS:
-				return {
-					...currentState,
-					userPosts: action.payload,
-				};
+		case USER_POSTS:
+			return {
+				...currentState,
+				userPosts: action.payload,
+			};
 		default:
 			return currentState;
 	}
@@ -52,8 +52,8 @@ const initialStateOfPost = {
 	searchParams: {},
 	tags: [],
 	postLikeLength: 0,
-	commentLikeLength:0,
-	postLength:0
+	commentLikeLength: 0,
+	postLength: 0,
 };
 
 const postsReducer = (currentState = initialStateOfPost, action: any): any => {
@@ -62,17 +62,17 @@ const postsReducer = (currentState = initialStateOfPost, action: any): any => {
 			return {
 				...currentState,
 				posts: action.payload,
-				tags:[],
-				postLength:action.payload.length
+				tags: [],
+				postLength: action.payload.length,
 			};
-			case ADD_POST:
-				let val=currentState.postLength+1
-				return {
-					...currentState,
-					tags:[],
-					postLength:val
-				}
-					
+		case ADD_POST:
+			let val = currentState.postLength + 1;
+			return {
+				...currentState,
+				tags: [],
+				postLength: val,
+			};
+
 		case POST_TAGS:
 			return {
 				...currentState,
@@ -95,7 +95,7 @@ const postsReducer = (currentState = initialStateOfPost, action: any): any => {
 		case LIKE_POST:
 			return { ...currentState, postLikeLength: action.payload };
 
-			case LIKE_COMMENT:
+		case LIKE_COMMENT:
 			return { ...currentState, commentLikeLength: action.payload };
 		default:
 			return currentState;

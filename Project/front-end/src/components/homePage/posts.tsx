@@ -23,7 +23,7 @@ export default function PostComponent() {
 
 	useEffect(() => {
 		result();
-	}, [state.postLikeLength,state.postLength]);
+	}, [state.postLikeLength, state.postLength]);
 
 	window.onscroll = function () {
 		if (document.documentElement.scrollTop > 100) {
@@ -44,7 +44,7 @@ export default function PostComponent() {
 	return (
 		<div>
 			<div className="main-div">
-				<Sidenav />
+				{/* <Sidenav /> */}
 				<div className="col-m-8 posts-main-div">
 					<div className="main-container">
 						<AddPostComponent></AddPostComponent>

@@ -140,6 +140,12 @@ export const GlobalStyles = createGlobalStyle<{
         border:${({ theme }) => theme.border} !important;
         box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }
+    .profile-card{
+        color: ${({ theme }) => theme.titletagCommentIcons} !important;
+        background-color:${({ theme }) => theme.componentColor} !important;
+        border:${({ theme }) => theme.border} !important;
+        box-shadow:${({ theme }) => theme.boxShadow}  !important;
+    }
 
     .accordion-button:not(.collapsed) {
         background-color:${({ theme }) => theme.componentColor} !important;

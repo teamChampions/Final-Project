@@ -5,41 +5,60 @@
 	align-items: center;
 	border-radius: 15px;
 }
-span{
-	margin-left:5px;
+span {
+	margin-left: 5px;
 }
 
-.user-details-div{
-	padding:3%;
-	padding-left:0px;
+.user-details-div {
+	padding: 3%;
+	padding-left: 0px;
 }
-.profile-card{
-	margin-top: 5%;
+.profile-card {
+	margin-top: 2%;
 	border-radius: 15px;
-	background-color: white;
-	padding:2%;
-	font-family:Verdana, Geneva, Tahoma, sans-serif
+	max-width: 800px !important;
+	box-shadow: 0px 0px 6px 0px rgb(200, 200, 200) !important;
+	padding: 2%;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.post-card {
+	border: none !important;
+	margin: 10px auto !important;
+	padding: 20px 20px 20px 20px !important;
+	cursor: pointer;
+	background: white;
+	border-radius: 10px !important;
+	box-shadow: 0px 0px 6px 0px rgb(200, 200, 200) !important;
+	transition: all 0.4s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.main-container {
+	max-width: 550px;
+	margin: auto;
 }
 
 .image-div {
-	margin: 5%;
-	width: 20vw;
-	height: 20vw;
+	max-width: 250px;
+	max-height: 250px;
 	overflow: hidden;
 	border-radius: 50%;
-	margin-left:40%;
+	margin: auto;
 }
 
-.user-details{
+.ant-image-img {
+	min-height: 250px;
+}
+.user-details {
 	color: gray;
 }
-.user-name{
+.user-name {
 	font-size: xx-large;
 	color: gray;
-	margin-left:0px !important;
+	margin-left: 0px !important;
 }
-.profile-details-div{
-	margin:auto 0px !important;
+.profile-details-div {
+	margin: auto 0px !important;
 }
 .profile-image {
 	width: 100%;

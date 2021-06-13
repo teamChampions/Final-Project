@@ -50,3 +50,26 @@
 		right: 15px;
 	}
 }
+
+@media screen and (max-width: 500px) {
+	.main-div {
+		display: inline;
+		width: 100%;
+	}
+
+	.side-bar {
+		display: none;
+	}
+
+	.posts-main-div {
+		width: 100%;
+	}
+
+	.main-container {
+		margin: auto;
+	}
+
+	.backToTop {
+		display: none;
+	}
+}
