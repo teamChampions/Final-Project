@@ -94,6 +94,7 @@ export default function Header() {
 									<div
 										style={{
 											display: "grid",
+											margin: "auto auto",
 										}}
 									>
 										<FormControl

@@ -37,7 +37,7 @@ export default function Login() {
 		let result: any = await loginUser(data);
 		if (result) {
 			dispatch(result);
-			toast.success('Login successful', {
+			toast.success("Login successful", {
 				position: "top-center",
 				autoClose: 1500,
 				hideProgressBar: true,
@@ -45,12 +45,11 @@ export default function Login() {
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				transition:Zoom,
-				});
-				setTimeout(()=>history.push("/home"),1500)
-			
+				transition: Zoom,
+			});
+			setTimeout(() => history.push("/home"), 1500);
 		} else {
-			toast.error('Invalid username or password', {
+			toast.error("Invalid username or password", {
 				position: "top-center",
 				autoClose: 2000,
 				hideProgressBar: true,
@@ -58,8 +57,8 @@ export default function Login() {
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				transition:Zoom,
-				});
+				transition: Zoom,
+			});
 		}
 	};
 	console.log("login page");
@@ -67,7 +66,7 @@ export default function Login() {
 	return (
 		<div className="page">
 			<div className="secure-login-svg">
-				<img src={mylogin}></img>
+				<img src={mylogin} alt="login"></img>
 			</div>
 			<ToastContainer></ToastContainer>
 			<form onSubmit={login} className="login-form">
@@ -104,16 +103,18 @@ export default function Login() {
 						required
 						fullWidth
 					/>
-					<Button
-						variant="contained"
-						size="large"
-						color="primary"
-						type="submit"
-						className="button"
-					>
-						Login
-					</Button>
-					<div style={{ margin: "1vw", marginLeft: "4vw" }}>
+					<div className="button-placement">
+						<Button
+							variant="contained"
+							size="large"
+							color="primary"
+							type="submit"
+							className="button"
+						>
+							Login
+						</Button>
+					</div>
+					<div style={{ marginTop: "2vw", textAlign: "center" }}>
 						{"Not a user? "}
 						<Link to="/signup" className="link">
 							Sign Up

@@ -14,11 +14,21 @@
 
 .icon-style {
 	font-size: 28px !important;
-	color:#534edf;
+	color: #534edf;
 }
 
-.post-info{
+.post-info {
 	margin-left: 5px;
 	font-size: 20px;
-	color:#534edf;
+	color: #534edf;
+}
+
+@media screen and (max-width: 560px) {
+	.post-card {
+		transition: none;
+		border-radius: 0px !important;
+	}
+	.post-card:hover {
+		transform: none;
+	}
 }
