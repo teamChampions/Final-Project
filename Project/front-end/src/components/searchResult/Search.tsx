@@ -20,7 +20,7 @@ export default function Search({}: Props) {
 		getUsersByName(name).then((res) => {
 			dispatch(res);
 		});
-	}, []);
+	}, [params]);
 	const handleClick = async (id: any, username: any) => {
 		history.push("/profile/" + username, {
 			userid: id,
