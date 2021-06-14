@@ -120,7 +120,7 @@ export const GlobalStyles = createGlobalStyle<{
     .color{
         color: ${({ theme }) => theme.atomColor} !important;
     }
-    .positioning{
+    .positioning,.divider{
         color: ${({ theme }) => theme.atomColor} !important;
     }
     .edit-tag{
@@ -130,17 +130,11 @@ export const GlobalStyles = createGlobalStyle<{
         border:1px dashed  ${({ theme }) => theme.buttonColor} !important;
         color: ${({ theme }) => theme.buttonColor} !important;
     }
-    .accordion-button {
-        color: ${({ theme }) => theme.titletagCommentIcons} !important;
-        background-color:${({ theme }) => theme.componentColor} !important;
-        border:${({ theme }) => theme.border} !important;
-        box-shadow:${({ theme }) => theme.boxShadow}  !important;
-    }
     .search-input{
         border:${({ theme }) => theme.border} !important;
         box-shadow:${({ theme }) => theme.boxShadow}  !important;
     }
-    .profile-card{
+    .profile-card,.profile-list,.accordion-button{
         color: ${({ theme }) => theme.titletagCommentIcons} !important;
         background-color:${({ theme }) => theme.componentColor} !important;
         border:${({ theme }) => theme.border} !important;
@@ -166,6 +160,10 @@ export const GlobalStyles = createGlobalStyle<{
     }
     .no-comments{
         color:${({ theme }) => theme.text};
+    }
+    
+    h1,h2,h3,h4,h5,h6,p{
+        color:${({ theme }) => theme.text} !important;
     }
 `;
 

@@ -138,17 +138,19 @@ const getCurrentUserProfile = async (req: any, res: any) => {
 	}
 };
 
-const getUsersByName=async(req:any,res:any)=>{
+const getUsersByName = async (req: any, res: any) => {
+	let value = eval(`/${req.params.userName}/i`);
 	try {
 		const users = await userModel.find(
-			{userName:req.params.userName},
+			{ userName: value },
 			"_id userName email profileImage"
 		);
 		res.status(200).send(users);
 	} catch (err) {
 		res.status(404).send("User Not Found");
 	}
-}
+};
+
 export {
 	getAllusers,
 	signup,
@@ -156,5 +158,5 @@ export {
 	isAuthorised,
 	getCurrentUserProfile,
 	getCurrentUserProfilePosts,
-	getUsersByName
+	getUsersByName,
 };

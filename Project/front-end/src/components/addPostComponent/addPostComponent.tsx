@@ -1,7 +1,5 @@
-import  { useState } from "react";
-import {
-	Button,
-} from "@material-ui/core";
+import { useState } from "react";
+import { Button } from "@material-ui/core";
 import TextArea from "antd/lib/input/TextArea";
 import HashTagsComponent from "./hashTagsComponent";
 import "./addPost.css";
@@ -36,9 +34,9 @@ export const AddPostComponent = (props: Props) => {
 	// 	},
 	// }));
 	// const classes = useStyles();
-	const [Clear, setClear] = useState(false)
+	const [Clear, setClear] = useState(false);
 	const [filePick, setfilePick] = useState<any>({});
-	
+
 	const fileByAntd = (e: any) => {
 		setfilePick(e.target.files[0]);
 	};
@@ -51,10 +49,10 @@ export const AddPostComponent = (props: Props) => {
 		});
 		formData.append("image", filePick);
 		try {
-			if(description){
+			if (description) {
 				const res = await addPost(formData);
-				dispatch(res)
-				toast.info('Post added successfully', {
+				dispatch(res);
+				toast.info("Post added successfully", {
 					position: "top-center",
 					autoClose: 2000,
 					hideProgressBar: true,
@@ -62,12 +60,10 @@ export const AddPostComponent = (props: Props) => {
 					pauseOnHover: true,
 					draggable: true,
 					progress: undefined,
-					transition:Zoom,
-					});
-					
-			}
-			else{
-				toast.warning('Description is required', {
+					transition: Zoom,
+				});
+			} else {
+				toast.warning("Description is required", {
 					position: "top-center",
 					autoClose: 2000,
 					hideProgressBar: true,
@@ -75,11 +71,11 @@ export const AddPostComponent = (props: Props) => {
 					pauseOnHover: true,
 					draggable: true,
 					progress: undefined,
-					transition:Zoom,
-					});
+					transition: Zoom,
+				});
 			}
 		} catch (err) {
-			toast.error('Something went wrong', {
+			toast.error("Something went wrong", {
 				position: "top-center",
 				autoClose: 2000,
 				hideProgressBar: true,
@@ -87,15 +83,14 @@ export const AddPostComponent = (props: Props) => {
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				transition:Zoom,
-				});
+				transition: Zoom,
+			});
 		}
-		formData.delete('description')
-		formData.delete('tags[]')
-		formData.delete('image')
-		setDescription("")
-		setfilePick({})
-		//setClear(true)
+		formData.delete("description");
+		formData.delete("tags[]");
+		formData.delete("image");
+		setDescription("");
+		setfilePick({});
 	};
 
 	return (
@@ -133,7 +128,7 @@ export const AddPostComponent = (props: Props) => {
 										/>
 									</div>
 									<div className="addPost-tags">
-										<HashTagsComponent /* changeClear={changeClearFunction} */ clear={Clear}></HashTagsComponent>
+										<HashTagsComponent clear={Clear}></HashTagsComponent>
 									</div>
 									<div className="upload-post-container">
 										{/* <Upload

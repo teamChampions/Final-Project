@@ -202,28 +202,47 @@ var getUserPosts = function (req, res) { return __awaiter(void 0, void 0, void 0
 }); };
 exports.getUserPosts = getUserPosts;
 var getPostsByUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, posts;
+    var value, user, posts, err_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 3, , 4]);
+                value = eval("/" + req.params.user_name + "/i");
                 console.log(req.params);
-                return [4 /*yield*/, users_schema_1.default.findOne({ userName: req.params.user_name })];
+                return [4 /*yield*/, users_schema_1.default.findOne({
+                        userName: value,
+                    })];
             case 1:
                 user = _a.sent();
-                return [4 /*yield*/, posts_schema_1.default.find({ users: user._id }).populate({
+                return [4 /*yield*/, posts_schema_1.default.find({ users: user._id })
+                        .populate({
                         path: "users",
                         select: "_id userName",
+                    })
+                        .populate({
+                        path: "likes",
+                        populate: {
+                            path: "user",
+                            select: "_id userName",
+                        },
                     })];
             case 2:
                 posts = _a.sent();
                 res.send(posts);
-                return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 3:
+                err_5 = _a.sent();
+                res.status(404).json({
+                    message: "Not Found!",
+                });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.getPostsByUser = getPostsByUser;
 var deletePost = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var post, deletedComment, err_5;
+    var post, deletedComment, err_6;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -249,7 +268,7 @@ var deletePost = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 _a.label = 5;
             case 5: return [3 /*break*/, 7];
             case 6:
-                err_5 = _a.sent();
+                err_6 = _a.sent();
                 res.status(404).json({
                     message: "Not Found!",
                 });
@@ -260,7 +279,7 @@ var deletePost = function (req, res) { return __awaiter(void 0, void 0, void 0, 
 }); };
 exports.deletePost = deletePost;
 var getCommentsForPost = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var postComments, err_6;
+    var postComments, err_7;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -278,7 +297,7 @@ var getCommentsForPost = function (req, res) { return __awaiter(void 0, void 0, 
                         .populate({
                         path: "comments",
                         populate: {
-                            path: "likes"
+                            path: "likes",
                         },
                     })];
             case 1:
@@ -286,7 +305,7 @@ var getCommentsForPost = function (req, res) { return __awaiter(void 0, void 0, 
                 res.status(200).send(postComments);
                 return [3 /*break*/, 3];
             case 2:
-                err_6 = _a.sent();
+                err_7 = _a.sent();
                 res.status(404).send("Not found any comments");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
