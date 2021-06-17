@@ -40,6 +40,13 @@ export default function CardComponent({ data, flag, type }: Props) {
 		return false;
 	};
 
+	const viewProfile = (id: any, username: any) => {
+		history.push("/profile/" + username, {
+			userid: id,
+			userName: username,
+		});
+	};
+
 	const postDelete = async () => {
 		console.log("1. in post delet");
 		try {
