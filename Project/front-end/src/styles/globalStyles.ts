@@ -5,6 +5,8 @@ export const GlobalStyles = createGlobalStyle<{
 		body: string;
 		text: string;
 		menu: string;
+		m: string;
+
 		actions: string;
 		commenthover: string;
 		titletagCommentIcons: string;
